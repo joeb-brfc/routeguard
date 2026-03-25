@@ -1,8 +1,4 @@
 body {
-    background-color: red;
-}
-
-/* body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
@@ -15,4 +11,4 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
-} */
+}
