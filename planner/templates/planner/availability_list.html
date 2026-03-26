@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Availabilities</h2>
+
+{% if availabilities %}
+    <ul>
+        {% for availability in availabilities %}
+            <li>
+                {{ availability.driver }} -
+                {{ availability.date }} -
+                {{ availability.get_status_display }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No availability records found.</p>
+{% endif %}
+
+{% endblock %}
