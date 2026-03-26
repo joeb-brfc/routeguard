@@ -6,4 +6,5 @@ urlpatterns = [
     path("assignments/", views.assignment_list, name="assignment_list"),
     path("drivers/", views.driver_list, name="driver_list"),
     path("routes/", views.route_list, name="route_list"),
+    path("availabilities/", views.availability_list, name="availability_list"),
 ]
