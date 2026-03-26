@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Assignments</h2>
+
+{% if assignments %}
+    <ul>
+        {% for assignment in assignments %}
+            <li>
+                {{ assignment.driver }} -
+                {{ assignment.route }} -
+                {{ assignment.date }} -
+                {{ assignment.start_time }} to {{ assignment.end_time }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No assignments have been added yet.</p>
+{% endif %}
+
+{% endblock %} 
