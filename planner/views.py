@@ -29,3 +29,11 @@ def route_list(request):
         "planner/route_list.html",
         {"routes": routes},
     )
+
+def availability_list(request):
+    availabilities = Availability.objects.all()
+    return render(
+        request,
+        "planner/availability_list.html",
+        {"availabilities": availabilities},
+    )
