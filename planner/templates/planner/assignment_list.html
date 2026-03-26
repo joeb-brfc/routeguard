@@ -5,18 +5,30 @@
 <h2>Assignments</h2>
 
 {% if assignments %}
-    <ul>
-        {% for assignment in assignments %}
-            <li>
-                {{ assignment.driver }} -
-                {{ assignment.route }} -
-                {{ assignment.date }} -
-                {{ assignment.start_time }} to {{ assignment.end_time }}
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Route</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.driver }}</td>
+                    <td>{{ assignment.route }}</td>
+                    <td>{{ assignment.date }}</td>
+                    <td>{{ assignment.start_time }}</td>
+                    <td>{{ assignment.end_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% else %}
     <p>No assignments have been added yet.</p>
 {% endif %}
 
-{% endblock %} 
+{% endblock %}
