@@ -24,15 +24,20 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [🚀 Future Features](#-future-features)
   - [🛠️ Technologies Used](#️-technologies-used)
   - [🧪 Testing](#-testing)
+    - [Functional Testing](#functional-testing)
+    - [Data Rendering Testing](#data-rendering-testing)
+    - [UI Testing](#ui-testing)
+    - [Error Handling](#error-handling)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
-    - [🧩 Template Structure and Inheritance Issues](#-template-structure-and-inheritance-issues)
+    - [Template Structure and Inheritance Issues](#template-structure-and-inheritance-issues)
     - [🎨 Static Files Not Loading](#-static-files-not-loading)
-    - [🗂️ File Structure Organisation](#️-file-structure-organisation)
-    - [🔗 URL Routing Configuration](#-url-routing-configuration)
-    - [🧱 Template Rendering Output Issues](#-template-rendering-output-issues)
-    - [🧠 Key Learning Outcomes](#-key-learning-outcomes)
+    - [File Structure Organisation](#file-structure-organisation)
+    - [URL Routing Configuration](#url-routing-configuration)
+    - [Template Rendering Output Issues](#template-rendering-output-issues)
+    - [Key Learning Outcomes](#key-learning-outcomes)
+    - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
 
 
 ## 📌 Overview
@@ -84,6 +89,7 @@ The application is designed with simplicity and clarity in mind:
 - Immediate feedback is provided after actions (e.g. success messages, validation errors)  
 - The layout is responsive and accessible across different screen sizes  
 - Colour indicators (green, amber, red) provide intuitive feedback on assignment risk  
+- Data is displayed in structured tables to improve clarity and usability  
 
 The goal is to ensure that users can perform tasks quickly without confusion.
 
@@ -152,6 +158,9 @@ The application is built using a relational database with the following core mod
 - Basic risk indicator (green / amber / red)  
 - Responsive layout using HTML and CSS  
 - Admin panel for data management  
+- Data displayed in structured table layouts for improved readability  
+- Navigation links between all key data pages (Drivers, Routes, Assignments, Availabilities)  
+- Dynamic data rendering from database using Django views and templates  
 
 ---
 
@@ -180,16 +189,34 @@ The application is built using a relational database with the following core mod
 
 ## 🧪 Testing
 
-Manual testing was carried out throughout development to ensure:
+Manual testing was carried out throughout development to ensure functionality, usability, and data handling across the application.
 
-- CRUD functionality works correctly  
-- Validation prevents incorrect data entry  
-- Navigation works across all pages  
-- Templates render correctly  
-- Static files load properly  
-- No broken links or errors occur  
+### Functional Testing
 
-All identified issues were resolved or documented in the Challenges section.
+- Verified that all models (Driver, Route, Availability, Assignment) could be created and viewed via the Django admin panel  
+- Confirmed that data stored in the database is correctly retrieved and displayed in templates  
+- Tested navigation links between pages to ensure correct routing  
+
+### Data Rendering Testing
+
+- Ensured that data passed from views is correctly rendered in templates  
+- Tested scenarios where no data exists to confirm fallback messages (e.g. "No assignments have been added yet") display correctly  
+- Used temporary debug outputs (e.g. `{{ assignments|length }}`) to confirm data was being passed correctly  
+
+### UI Testing
+
+- Confirmed that table layouts render correctly across all list pages  
+- Verified consistent styling across pages using shared CSS  
+- Checked responsiveness of layout on different screen sizes  
+
+### Error Handling
+
+- Identified and resolved issues where data was not appearing due to:
+  - Incorrect variable names between views and templates  
+  - Missing context being passed from views  
+  - URL routing mismatches  
+
+All identified issues were resolved and documented in the Challenges section.
 
 ---
 
@@ -218,7 +245,7 @@ The deployed version was tested to ensure it matches the local development versi
 
 ## ⚠️ Challenges Faced & Solutions
 
-### 🧩 Template Structure and Inheritance Issues
+###  Template Structure and Inheritance Issues
 
 During development, an issue occurred where Django could not locate the base template (`TemplateDoesNotExist: base.html`). This was caused by an incorrect configuration of template directories and inconsistent file structure between project-level and app-level templates.
 
@@ -246,7 +273,7 @@ This ensured that static assets were correctly loaded and applied during develop
 
 ---
 
-### 🗂️ File Structure Organisation
+### File Structure Organisation
 
 An early issue involved incorrectly placing static files within the templates directory. This prevented Django from properly distinguishing between templates and static assets.
 
@@ -260,7 +287,7 @@ This improved maintainability and aligned the project with Django best practices
 
 ---
 
-### 🔗 URL Routing Configuration
+### URL Routing Configuration
 
 Initially, the homepage failed to render due to missing URL configuration between the project and the application.
 
@@ -274,7 +301,7 @@ This enabled correct routing and navigation within the application.
 
 ---
 
-### 🧱 Template Rendering Output Issues
+### Template Rendering Output Issues
 
 At one stage, the application displayed a blank page despite no visible errors. This was due to the absence of a `{% block content %}` placeholder in the base template.
 
@@ -287,7 +314,7 @@ This reinforced understanding of Django’s template inheritance system.
 
 ---
 
-### 🧠 Key Learning Outcomes
+### Key Learning Outcomes
 
 Through resolving these issues, several important development concepts were reinforced:
 
@@ -298,3 +325,19 @@ Through resolving these issues, several important development concepts were rein
 - Debugging techniques using error messages and browser developer tools  
 
 These challenges strengthened understanding of Django’s architecture and contributed to the development of a more robust and maintainable application.
+
+### Data Not Displaying in Templates
+
+During development, an issue occurred where database records (e.g. assignments) were not appearing in the frontend templates, despite being present in the Django admin panel.
+
+This was caused by inconsistencies between views, templates, and URL routing.
+
+**To resolve this:**
+
+- Ensured that querysets were correctly retrieved in views using `.objects.all()`  
+- Passed data to templates using context dictionaries (e.g. `{"assignments": assignments}`)  
+- Verified that template variable names matched those passed from the view  
+- Checked URL routing to ensure the correct views were being rendered  
+- Used debug techniques such as displaying object counts in templates  
+
+This improved understanding of how Django connects the database, views, and templates.
