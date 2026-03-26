@@ -5,11 +5,20 @@
 <h2>Drivers</h2>
 
 {% if drivers %}
-    <ul>
-        {% for driver in drivers %}
-            <li>{{ driver.name }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Driver Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for driver in drivers %}
+                <tr>
+                    <td>{{ driver.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% else %}
     <p>No drivers have been added yet.</p>
 {% endif %}
