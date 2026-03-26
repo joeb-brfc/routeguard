@@ -5,15 +5,24 @@
 <h2>Availabilities</h2>
 
 {% if availabilities %}
-    <ul>
-        {% for availability in availabilities %}
-            <li>
-                {{ availability.driver }} -
-                {{ availability.date }} -
-                {{ availability.get_status_display }}
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for availability in availabilities %}
+                <tr>
+                    <td>{{ availability.driver }}</td>
+                    <td>{{ availability.date }}</td>
+                    <td>{{ availability.get_status_display }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% else %}
     <p>No availability records found.</p>
 {% endif %}
