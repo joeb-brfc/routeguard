@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Assignment, Driver
+from .models import Assignment, Driver, Route, Availability
 
 
 def home(request):
@@ -20,4 +20,12 @@ def driver_list(request):
         request,
         "planner/driver_list.html",
         {"drivers": drivers},
+    )
+
+def route_list(request):
+    routes = Route.objects.all()
+    return render(
+        request,
+        "planner/route_list.html",
+        {"routes": routes},
     )
