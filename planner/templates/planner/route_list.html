@@ -5,13 +5,20 @@
 <h2>Routes</h2>
 
 {% if routes %}
-    <ul>
-        {% for route in routes %}
-            <li>
-                {{ route.name }}
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Route Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route in routes %}
+                <tr>
+                    <td>{{ route.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% else %}
     <p>No routes have been added yet.</p>
 {% endif %}
