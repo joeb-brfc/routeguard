@@ -39,6 +39,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Key Learning Outcomes](#key-learning-outcomes)
     - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
     - [🧾 Missing Form Import in View](#-missing-form-import-in-view)
+    - [🔁 Missing Redirect Import in View](#-missing-redirect-import-in-view)
 
 
 ## 📌 Overview
@@ -353,3 +354,14 @@ During development of the driver creation feature, a `NameError` occurred becaus
 - The missing import statement `from .forms import DriverForm` was added to `views.py`
 
 This reinforced the importance of correctly connecting Django forms, views, and templates when building CRUD functionality.
+
+### 🔁 Missing Redirect Import in View
+
+During testing of the driver creation feature, a `NameError` occurred because `redirect` had not been imported into `views.py`.
+
+**To resolve this:**
+
+- The import statement was updated from `from django.shortcuts import render`  
+  to `from django.shortcuts import render, redirect`
+
+This ensured that successful form submissions could redirect users back to the relevant list page after saving data.
