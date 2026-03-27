@@ -21,6 +21,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Assignment](#assignment)
     - [Relationships](#relationships)
   - [⚙️ Features](#️-features)
+  - [Preventing Duplicate Records](#preventing-duplicate-records)
   - [🚀 Future Features](#-future-features)
   - [🛠️ Technologies Used](#️-technologies-used)
   - [🧪 Testing](#-testing)
@@ -162,7 +163,15 @@ The application is built using a relational database with the following core mod
 - Admin panel for data management  
 - Data displayed in structured table layouts for improved readability  
 - Navigation links between all key data pages (Drivers, Routes, Assignments, Availabilities)  
-- Dynamic data rendering from database using Django views and templates  
+- Dynamic data rendering from database using Django views and templates
+
+ ## Preventing Duplicate Records
+
+To ensure data integrity, a uniqueness constraint was added to the `employee_id` field in the Driver model.
+
+This prevents duplicate driver records from being created and ensures that each driver can be uniquely identified within the system.
+
+This validation is enforced at the database level, providing a robust and reliable solution.
 
 ---
 
