@@ -38,6 +38,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Template Rendering Output Issues](#template-rendering-output-issues)
     - [Key Learning Outcomes](#key-learning-outcomes)
     - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
+    - [🧾 Missing Form Import in View](#-missing-form-import-in-view)
 
 
 ## 📌 Overview
@@ -341,3 +342,14 @@ This was caused by inconsistencies between views, templates, and URL routing.
 - Used debug techniques such as displaying object counts in templates  
 
 This improved understanding of how Django connects the database, views, and templates.
+
+### 🧾 Missing Form Import in View
+
+During development of the driver creation feature, a `NameError` occurred because `DriverForm` had not been imported into `views.py`.
+
+**To resolve this:**
+
+- The form was defined in `forms.py` using a Django `ModelForm`
+- The missing import statement `from .forms import DriverForm` was added to `views.py`
+
+This reinforced the importance of correctly connecting Django forms, views, and templates when building CRUD functionality.
