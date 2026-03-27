@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Assignment, Driver, Route, Availability
-from .forms import DriverForm
+from .forms import DriverForm, RouteForm
 
 
 def home(request):
@@ -51,5 +51,20 @@ def create_driver(request):
     return render(
         request,
         "planner/create_driver.html",
+        {"form": form},
+    )
+
+def create_route(request):
+    if request.method == "POST":
+        form = RouteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("route_list")
+    else:
+        form = RouteForm()
+
+    return render(
+        request,
+        "planner/create_route.html",
         {"form": form},
     )
