@@ -37,3 +37,18 @@ def availability_list(request):
         "planner/availability_list.html",
         {"availabilities": availabilities},
     )
+
+def create_driver(request):
+    if request.method == "POST":
+        form = DriverForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("driver_list")
+    else:
+        form = DriverForm()
+
+    return render(
+        request,
+        "planner/create_driver.html",
+        {"form": form},
+    )
