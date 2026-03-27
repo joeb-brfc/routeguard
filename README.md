@@ -29,18 +29,20 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Data Rendering Testing](#data-rendering-testing)
     - [UI Testing](#ui-testing)
     - [Error Handling](#error-handling)
+    - [Form Submission Testing](#form-submission-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
     - [Template Structure and Inheritance Issues](#template-structure-and-inheritance-issues)
-    - [🎨 Static Files Not Loading](#-static-files-not-loading)
+    - [Static Files Not Loading](#static-files-not-loading)
     - [File Structure Organisation](#file-structure-organisation)
     - [URL Routing Configuration](#url-routing-configuration)
     - [Template Rendering Output Issues](#template-rendering-output-issues)
     - [Key Learning Outcomes](#key-learning-outcomes)
     - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
-    - [🧾 Missing Form Import in View](#-missing-form-import-in-view)
-    - [🔁 Missing Redirect Import in View](#-missing-redirect-import-in-view)
+    - [Missing Form Import in View](#missing-form-import-in-view)
+    - [Missing Redirect Import in View](#missing-redirect-import-in-view)
+    - [Form Handling and Submission Issues](#form-handling-and-submission-issues)
 
 
 ## 📌 Overview
@@ -92,7 +94,8 @@ The application is designed with simplicity and clarity in mind:
 - Immediate feedback is provided after actions (e.g. success messages, validation errors)  
 - The layout is responsive and accessible across different screen sizes  
 - Colour indicators (green, amber, red) provide intuitive feedback on assignment risk  
-- Data is displayed in structured tables to improve clarity and usability  
+- Data is displayed in structured tables to improve clarity and usability 
+- Users can create new records directly from the interface without using the admin panel  
 
 The goal is to ensure that users can perform tasks quickly without confusion.
 
@@ -164,6 +167,9 @@ The application is built using a relational database with the following core mod
 - Data displayed in structured table layouts for improved readability  
 - Navigation links between all key data pages (Drivers, Routes, Assignments, Availabilities)  
 - Dynamic data rendering from database using Django views and templates
+- Frontend forms for creating Drivers and Routes using Django ModelForms  
+- Automatic redirection after successful form submission to improve user workflow  
+- Dynamic form validation and error handling through Django forms  
 
  ## Preventing Duplicate Records
 
@@ -195,6 +201,7 @@ This validation is enforced at the database level, providing a robust and reliab
 - SQLite (development database)  
 - Git & GitHub (version control)  
 - Heroku (deployment)  
+- Django Forms (ModelForms for data input and validation)  
 
 ---
 
@@ -227,6 +234,13 @@ Manual testing was carried out throughout development to ensure functionality, u
   - Missing context being passed from views  
   - URL routing mismatches  
 
+### Form Submission Testing
+
+- Verified that Driver and Route forms render correctly on the frontend  
+- Confirmed that valid form submissions create new database records  
+- Ensured users are redirected to the appropriate list page after submission  
+- Tested invalid inputs to confirm validation errors are displayed  
+
 All identified issues were resolved and documented in the Challenges section.
 
 ---
@@ -251,7 +265,7 @@ The deployed version was tested to ensure it matches the local development versi
 
 - Django documentation  
 - Code Institute learning materials  
-- Bootstrap (if used later)  
+- Bootstrap
 - Online resources and tutorials used for guidance (referenced in code comments where applicable)  
 
 ## ⚠️ Challenges Faced & Solutions
@@ -270,7 +284,7 @@ This ensured that template inheritance using `{% extends "base.html" %}` functio
 
 ---
 
-### 🎨 Static Files Not Loading
+### Static Files Not Loading
 
 The application initially failed to apply CSS styling despite correct linking in the template. This was due to Django not recognising the static files directory.
 
@@ -353,7 +367,7 @@ This was caused by inconsistencies between views, templates, and URL routing.
 
 This improved understanding of how Django connects the database, views, and templates.
 
-### 🧾 Missing Form Import in View
+### Missing Form Import in View
 
 During development of the driver creation feature, a `NameError` occurred because `DriverForm` had not been imported into `views.py`.
 
@@ -364,7 +378,7 @@ During development of the driver creation feature, a `NameError` occurred becaus
 
 This reinforced the importance of correctly connecting Django forms, views, and templates when building CRUD functionality.
 
-### 🔁 Missing Redirect Import in View
+### Missing Redirect Import in View
 
 During testing of the driver creation feature, a `NameError` occurred because `redirect` had not been imported into `views.py`.
 
@@ -374,3 +388,19 @@ During testing of the driver creation feature, a `NameError` occurred because `r
   to `from django.shortcuts import render, redirect`
 
 This ensured that successful form submissions could redirect users back to the relevant list page after saving data.
+
+### Form Handling and Submission Issues
+
+During implementation of frontend forms, errors occurred when submitting data due to missing imports and incorrect view configuration.
+
+Issues included:
+- `DriverForm` not being defined in `views.py`  
+- `redirect` not being imported when handling successful form submission  
+
+**To resolve this:**
+
+- Imported forms using `from .forms import DriverForm, RouteForm`  
+- Updated Django shortcuts import to include `redirect`  
+- Ensured correct POST handling logic in views  
+
+This reinforced understanding of how Django processes form submissions and handles HTTP request methods.
