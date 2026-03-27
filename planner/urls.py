@@ -7,4 +7,5 @@ urlpatterns = [
     path("drivers/", views.driver_list, name="driver_list"),
     path("routes/", views.route_list, name="route_list"),
     path("availabilities/", views.availability_list, name="availability_list"),
+    path("drivers/create/", views.create_driver, name="create_driver"),
 ]
