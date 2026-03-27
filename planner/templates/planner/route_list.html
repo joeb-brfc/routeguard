@@ -10,13 +10,17 @@
     <table>
         <thead>
             <tr>
-                <th>Route Name</th>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Estimated Hours</th>
             </tr>
         </thead>
         <tbody>
             {% for route in routes %}
                 <tr>
                     <td>{{ route.name }}</td>
+                    <td>{{ route.destination }}</td>
+                    <td>{{ route.estimated_hours }}</td>
                 </tr>
             {% endfor %}
         </tbody>
