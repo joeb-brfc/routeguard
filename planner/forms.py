@@ -1,5 +1,5 @@
 from django import forms
-from .models import Availability, Driver, Route
+from .models import Assignment, Availability, Driver, Route
 
 
 class DriverForm(forms.ModelForm):
@@ -16,3 +16,8 @@ class AvailabilityForm(forms.ModelForm):
     class Meta:
         model = Availability
         fields = ["driver", "date", "status"]
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignment
+        fields = ["driver", "route", "date", "start_time", "end_time"]
