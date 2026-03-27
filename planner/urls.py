@@ -8,4 +8,5 @@ urlpatterns = [
     path("routes/", views.route_list, name="route_list"),
     path("availabilities/", views.availability_list, name="availability_list"),
     path("drivers/create/", views.create_driver, name="create_driver"),
+    path("routes/create/", views.create_route, name="create_route"),
 ]
