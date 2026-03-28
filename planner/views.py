@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Assignment, Driver, Route, Availability
 from .forms import AssignmentForm, AvailabilityForm, DriverForm, RouteForm
 
@@ -99,7 +99,7 @@ def create_assignment(request):
         {"form": form},
     )
 
-def edit_driver(request, driver_1d):
+def edit_driver(request, driver_id):
     #Get the specific driver by id or return 404 if not found
     driver = get_object_or_404(Driver, id=driver_id)
 
