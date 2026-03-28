@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Driver</h2>
+
+<p>Update the details for {{ driver.name }}.</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Driver</button>
+</form>
+
+<p><a href="{% url 'driver_list' %}">Back to Drivers</a></p>
+
+{% endblock %}
