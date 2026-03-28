@@ -21,7 +21,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Assignment](#assignment)
     - [Relationships](#relationships)
   - [⚙️ Features](#️-features)
-  - [Preventing Duplicate Records](#preventing-duplicate-records)
+  - [🔗 Data Flow and Application Logic](#-data-flow-and-application-logic)
   - [🚀 Future Features](#-future-features)
   - [🛠️ Technologies Used](#️-technologies-used)
   - [🧪 Testing](#-testing)
@@ -42,7 +42,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
     - [Missing Form Import in View](#missing-form-import-in-view)
     - [Missing Redirect Import in View](#missing-redirect-import-in-view)
-    - [Form Handling and Submission Issues](#form-handling-and-submission-issues)
+    - [🧾 Form Handling and View Integration Issues](#-form-handling-and-view-integration-issues)
 
 
 ## 📌 Overview
@@ -96,6 +96,7 @@ The application is designed with simplicity and clarity in mind:
 - Colour indicators (green, amber, red) provide intuitive feedback on assignment risk  
 - Data is displayed in structured tables to improve clarity and usability 
 - Users can create new records directly from the interface without using the admin panel  
+- Users receive immediate visual feedback through updated tables after submitting data  
 
 The goal is to ensure that users can perform tasks quickly without confusion.
 
@@ -152,34 +153,48 @@ The application is built using a relational database with the following core mod
 
 ## ⚙️ Features
 
-- User authentication (login/logout)  
 - Full CRUD functionality for:
   - Drivers  
   - Routes  
   - Availability  
   - Assignments  
-- Validation to prevent:
-  - Assigning unavailable drivers  
-  - Overlapping assignments  
-- Basic risk indicator (green / amber / red)  
-- Responsive layout using HTML and CSS  
-- Admin panel for data management  
-- Data displayed in structured table layouts for improved readability  
+
+- Frontend forms built using Django ModelForms to allow users to create records without using the admin panel  
+
+- Dynamic data rendering from the database using Django views and templates  
+
 - Navigation links between all key data pages (Drivers, Routes, Assignments, Availabilities)  
-- Dynamic data rendering from database using Django views and templates
-- Frontend forms for creating Drivers and Routes using Django ModelForms  
+
+- Data displayed in structured table layouts for improved readability and usability  
+
 - Automatic redirection after successful form submission to improve user workflow  
-- Dynamic form validation and error handling through Django forms  
 
- ## Preventing Duplicate Records
+- Validation to support data integrity, including:
+  - Prevention of duplicate driver records (unique employee ID)  
+  - Foundation for preventing scheduling conflicts  
 
-To ensure data integrity, a uniqueness constraint was added to the `employee_id` field in the Driver model.
+- Responsive layout using HTML and CSS  
 
-This prevents duplicate driver records from being created and ensures that each driver can be uniquely identified within the system.
-
-This validation is enforced at the database level, providing a robust and reliable solution.
+- Admin panel for backend data management  
 
 ---
+
+## 🔗 Data Flow and Application Logic
+
+The application follows Django’s Model-View-Template (MVT) architecture:
+
+- **Models** define the database structure and relationships  
+- **Views** retrieve and process data from the database  
+- **Templates** render data dynamically for the user  
+
+User interactions follow this flow:
+
+1. A user submits a form (e.g. create driver, route, availability or assignment)  
+2. The view processes the request and validates the data  
+3. If valid, the data is saved to the database  
+4. The user is redirected to a list page where updated data is displayed  
+
+This structure ensures clear separation of concerns and maintainable code.
 
 ## 🚀 Future Features
 
@@ -389,18 +404,19 @@ During testing of the driver creation feature, a `NameError` occurred because `r
 
 This ensured that successful form submissions could redirect users back to the relevant list page after saving data.
 
-### Form Handling and Submission Issues
+### 🧾 Form Handling and View Integration Issues
 
-During implementation of frontend forms, errors occurred when submitting data due to missing imports and incorrect view configuration.
+During implementation of frontend forms, errors occurred when submitting data due to missing imports and incomplete view configuration.
 
 Issues included:
-- `DriverForm` not being defined in `views.py`  
-- `redirect` not being imported when handling successful form submission  
+- `ModelForm` classes not being imported into `views.py`  
+- Missing `redirect` import when handling successful form submissions  
+- Incorrect handling of POST requests  
 
 **To resolve this:**
 
-- Imported forms using `from .forms import DriverForm, RouteForm`  
+- Imported forms using `from .forms import DriverForm, RouteForm, AvailabilityForm, AssignmentForm`  
 - Updated Django shortcuts import to include `redirect`  
-- Ensured correct POST handling logic in views  
+- Ensured correct conditional handling of request methods (`GET` vs `POST`)  
 
-This reinforced understanding of how Django processes form submissions and handles HTTP request methods.
+This reinforced understanding of how Django processes form submissions and connects forms, views, and templates.
