@@ -44,7 +44,6 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Missing Redirect Import in View](#missing-redirect-import-in-view)
     - [🧾 Form Handling and View Integration Issues](#-form-handling-and-view-integration-issues)
 
-
 ## 📌 Overview
 
 RouteGuard is a full-stack Django web application designed to support logistics planning by managing drivers, routes, availability, and assignments.
@@ -94,7 +93,7 @@ The application is designed with simplicity and clarity in mind:
 - Immediate feedback is provided after actions (e.g. success messages, validation errors)  
 - The layout is responsive and accessible across different screen sizes  
 - Colour indicators (green, amber, red) provide intuitive feedback on assignment risk  
-- Data is displayed in structured tables to improve clarity and usability 
+- Data is displayed in structured tables to improve clarity and usability
 - Users can create new records directly from the interface without using the admin panel  
 - Users receive immediate visual feedback through updated tables after submitting data  
 
@@ -130,15 +129,19 @@ The goal is to ensure that users can perform tasks quickly without confusion.
 The application is built using a relational database with the following core models:
 
 ### Driver
+
 - Stores driver information such as name and status  
 
 ### Route
+
 - Stores route details including destination and estimated duration  
 
 ### Availability
+
 - Records driver availability on specific dates (available, rest, holiday, etc.)  
 
 ### Assignment
+
 - Links drivers to routes with a date and time  
 - Used to track planned work and calculate scheduling risk  
 
@@ -285,7 +288,7 @@ The deployed version was tested to ensure it matches the local development versi
 
 ## ⚠️ Challenges Faced & Solutions
 
-###  Template Structure and Inheritance Issues
+### Template Structure and Inheritance Issues
 
 During development, an issue occurred where Django could not locate the base template (`TemplateDoesNotExist: base.html`). This was caused by an incorrect configuration of template directories and inconsistent file structure between project-level and app-level templates.
 
@@ -409,6 +412,7 @@ This ensured that successful form submissions could redirect users back to the r
 During implementation of frontend forms, errors occurred when submitting data due to missing imports and incomplete view configuration.
 
 Issues included:
+
 - `ModelForm` classes not being imported into `views.py`  
 - Missing `redirect` import when handling successful form submissions  
 - Incorrect handling of POST requests  
