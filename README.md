@@ -285,6 +285,7 @@ The deployed version was tested to ensure it matches the local development versi
 - Code Institute learning materials  
 - Bootstrap
 - Online resources and tutorials used for guidance (referenced in code comments where applicable)  
+- Django documentation, particularly guidance on ModelForms and form validation
 
 ## ⚠️ Challenges Faced & Solutions
 
