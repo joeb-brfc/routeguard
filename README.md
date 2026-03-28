@@ -116,6 +116,7 @@ The goal is to ensure that users can perform tasks quickly without confusion.
 - As a user, I want to mark drivers as available, resting, or on holiday so that I can plan accurately  
 - As a user, I want to prevent assigning unavailable drivers so that scheduling errors are avoided  
 - As a user, I want to prevent assigning a driver to overlapping routes so that double-booking does not occur  
+- As a user, I want to prevent drivers being assigned more than once on the same day so that duplicate daily bookings do not occur
 
 ### Feedback & Risk
 
@@ -179,6 +180,7 @@ The application is built using a relational database with the following core mod
 - Responsive layout using HTML and CSS  
 
 - Admin panel for backend data management  
+- Assignment validation to prevent duplicate same-day driver bookings
 
 ---
 
@@ -207,6 +209,7 @@ This structure ensures clear separation of concerns and maintainable code.
 - Multi-user roles (admin vs standard user)  
 - Integration with external logistics systems  
 - Exporting reports  
+- More advanced time-based validation, including rest-gap checks and cumulative driver-hours rules
 
 ---
 
@@ -286,6 +289,7 @@ The deployed version was tested to ensure it matches the local development versi
 - Bootstrap
 - Online resources and tutorials used for guidance (referenced in code comments where applicable)  
 - Django documentation, particularly guidance on ModelForms and form validation
+- Django documentation for guidance on querying related models and validating form data
 
 ## ⚠️ Challenges Faced & Solutions
 

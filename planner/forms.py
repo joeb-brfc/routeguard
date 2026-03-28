@@ -26,7 +26,7 @@ class AssignmentForm(forms.ModelForm):
         # Get the form data that Django has already cleaned
         cleaned_data = super().clean()
 
-        # Pull out the two time fields
+        # Pull out the values we need for validation
         driver = cleaned_data.get("driver")
         date = cleaned_data.get("date")
         start_time = cleaned_data.get("start_time")
@@ -45,6 +45,15 @@ class AssignmentForm(forms.ModelForm):
             if availability and availability.status != "available":
                 raise forms.ValidationError(
                     f"Driver is not available on {date} (status: {availability.status})."
+                )
+            
+        # validation 3: A driver can not work the same day on multiple routes
+        if driver and date:
+            existing_assignments = Assignment.objects.filter(driver=driver, date=date)
+              # If editing later, exclude the current record from the check
+            if existing_assignments.exists():
+                raise forms.ValidationError(
+                    f"Driver already has an assignment on {date}."
                 )
 
         # Always return the cleaned data
