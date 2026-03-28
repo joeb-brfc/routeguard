@@ -98,3 +98,22 @@ def create_assignment(request):
         "planner/create_assignment.html",
         {"form": form},
     )
+
+def edit_driver(request, driver_1d):
+    #Get the specific driver by id or return 404 if not found
+    driver = get_object_or_404(Driver, id=driver_id)
+
+    if request.method == "POST":
+        #Reuse the existing DriverForm, but fill it with this driver's data
+        form = DriverForm(request.POST, instance=driver)
+        if form.is_valid():
+            form.save()
+            return redirect("driver_list")
+    else:
+        #On first load, show form filled with the driver's current data
+        form = DriverForm(instance=driver)
+    return render(
+        request,
+        "planner/edit_driver.html",
+        {"form": form, "driver": driver},
+    )
