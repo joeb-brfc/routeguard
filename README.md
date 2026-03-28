@@ -30,6 +30,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [UI Testing](#ui-testing)
     - [Error Handling](#error-handling)
     - [Form Submission Testing](#form-submission-testing)
+    - [Assignment Validation Testing](#assignment-validation-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -261,6 +262,13 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Confirmed that valid form submissions create new database records  
 - Ensured users are redirected to the appropriate list page after submission  
 - Tested invalid inputs to confirm validation errors are displayed  
+
+### Assignment Validation Testing
+
+- Verified that assignments cannot be created if the end time is earlier than the start time  
+- Confirmed that drivers marked as unavailable cannot be assigned on that date  
+- Tested that drivers cannot be assigned more than once on the same date  
+- Confirmed that validation errors are displayed clearly to the user on the form  
 
 All identified issues were resolved and documented in the Challenges section.
 
