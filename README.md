@@ -31,6 +31,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Error Handling](#error-handling)
     - [Form Submission Testing](#form-submission-testing)
     - [Assignment Validation Testing](#assignment-validation-testing)
+    - [Update Functionality Testing](#update-functionality-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -44,6 +45,9 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Missing Form Import in View](#missing-form-import-in-view)
     - [Missing Redirect Import in View](#missing-redirect-import-in-view)
     - [🧾 Form Handling and View Integration Issues](#-form-handling-and-view-integration-issues)
+    - [🛠️ Edit View Errors and Debugging](#️-edit-view-errors-and-debugging)
+      - [Issues encountered](#issues-encountered)
+      - [How I fixed it](#how-i-fixed-it)
 
 ## 📌 Overview
 
@@ -182,6 +186,7 @@ The application is built using a relational database with the following core mod
 
 - Admin panel for backend data management  
 - Assignment validation to prevent duplicate same-day driver bookings
+- Frontend edit functionality for updating existing records
 
 ---
 
@@ -269,6 +274,12 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Confirmed that drivers marked as unavailable cannot be assigned on that date  
 - Tested that drivers cannot be assigned more than once on the same date  
 - Confirmed that validation errors are displayed clearly to the user on the form  
+
+### Update Functionality Testing
+
+- Verified that existing driver records can be edited through the frontend  
+- Confirmed that forms load with existing values pre-filled  
+- Ensured updated data is saved and displayed immediately in the relevant table  
 
 All identified issues were resolved and documented in the Challenges section.
 
@@ -437,3 +448,32 @@ Issues included:
 - Ensured correct conditional handling of request methods (`GET` vs `POST`)  
 
 This reinforced understanding of how Django processes form submissions and connects forms, views, and templates.
+
+### 🛠️ Edit View Errors and Debugging
+
+While building the driver edit (update) functionality, I ran into a couple of issues related to URL parameters and missing imports.
+
+#### Issues encountered
+
+- A `TypeError` occurred:
+edit_driver() got an unexpected keyword argument 'driver_id'
+
+This happened because the URL was passing `driver_id`, but the view function was expecting a different parameter name.
+
+- I also forgot to import `get_object_or_404` in `views.py`, which caused another error when trying to retrieve the driver.
+
+#### How I fixed it
+
+- Updated the view function to match the URL parameter:
+```python
+def edit_driver(request, driver_id):
+
+Made sure the parameter name matched exactly between urls.py and views.py
+
+Added the missing import:
+from django.shortcuts import get_object_or_404
+
+Outcome
+The edit page now loads correctly and allows existing drivers to be updated
+Improved my understanding of how Django passes URL parameters into views
+Reinforced the importance of consistent naming and remembering required imports
