@@ -160,3 +160,31 @@ def delete_route(request, route_id):
         "planner/delete_route.html",
         {"route": route},
     )
+
+def edit_assignment(request, assignment_id):
+    assignment = get_object_or_404(Assignment, id=assignment_id)
+
+    if request.method == "POST":
+        form = AssignmentForm(request.POST, instance=assignment)
+        if form.is_valid():
+            form.save()
+            return redirect("assignment_list")
+    else:
+        form = AssignmentForm(instance=assignment)
+    return render(
+        request,
+        "planner/edit_assignment.html",
+        {"form": form, "assignment": assignment},
+    )
+
+def delete_assignment(request, assignment_id):
+    assignment = get_object_or_404(Assignment, id=assignment_id)
+
+    if request.method == "POST":
+        assignment.delete()
+        return redirect("assignment_list")
+    return render(
+        request,
+        "planner/delete_assignment.html",
+        {"assignment": assignment},
+    )
