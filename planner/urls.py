@@ -17,4 +17,5 @@ urlpatterns = [
     path("routes/<int:route_id>/delete/", views.delete_route, name="delete_route"),
     path("assignments/<int:assignment_id>/edit/", views.edit_assignment, name="edit_assignment"),
     path("assignments/<int:assignment_id>/delete/", views.delete_assignment, name="delete_assignment"),
+    path("availabilities/<int:availability_id>/edit/", views.edit_availability, name="edit_availability"),
 ]

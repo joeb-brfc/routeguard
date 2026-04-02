@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Availability</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Availability</button>
+</form>
+
+<p><a href="{% url 'availability_list' %}">Back to Availabilities</a></p>
+
+{% endblock %}
