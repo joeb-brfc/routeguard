@@ -35,6 +35,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Delete Functionality Testing](#delete-functionality-testing)
     - [Availability CRUD Testing](#availability-crud-testing)
     - [User Feedback Testing](#user-feedback-testing)
+    - [UI Polish Testing](#ui-polish-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -106,6 +107,8 @@ The application is designed with simplicity and clarity in mind:
 - Data is displayed in structured tables to improve clarity and usability
 - Users can create new records directly from the interface without using the admin panel  
 - Users receive immediate visual feedback through updated tables after submitting data  
+- Shared styling was applied across navigation, tables, forms, and messages to improve visual consistency  
+- Brief descriptive text was added to key pages to help users understand the purpose of each section  
 
 The goal is to ensure that users can perform tasks quickly without confusion.
 
@@ -197,6 +200,8 @@ The application is built using a relational database with the following core mod
 - Full CRUD functionality implemented across all models (Drivers, Routes, Assignments, Availabilities)
 - Frontend edit and delete functionality for availability records with confirmation pages
 - User feedback messages displayed after create, update, and delete actions to improve user experience
+- Consistent styling applied across CRUD pages for improved readability and usability
+- Success messages displayed clearly after create, update, and delete actions
 
 ---
 
@@ -310,7 +315,13 @@ a- Confirmed that assignment validation also applies during record updates, prev
 
 - Verified that success messages are displayed after creating, updating, and deleting records  
 - Confirmed messages appear consistently across all models (Drivers, Routes, Assignments, Availabilities)  
-- Ensured messages improve user feedback and confirm successful actions  
+- Ensured messages improve user feedback and confirm successful actions
+
+### UI Polish Testing
+
+- Verified that shared styling was applied consistently across all main pages  
+- Confirmed that tables, navigation, and success messages display clearly  
+- Checked that descriptive page text improves clarity without affecting functionality    
 
 All identified issues were resolved and documented in the Challenges section.
 
