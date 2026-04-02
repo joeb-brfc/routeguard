@@ -6,6 +6,8 @@
 
 <p><a href="{% url 'create_route' %}">Add New Route</a></p>
 
+<a href="{% url 'delete_route' route.id %}">Delete</a>
+
 {% if routes %}
     <table>
         <thead>
