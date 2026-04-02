@@ -32,6 +32,8 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Form Submission Testing](#form-submission-testing)
     - [Assignment Validation Testing](#assignment-validation-testing)
     - [Update Functionality Testing](#update-functionality-testing)
+    - [Delete Functionality Testing](#delete-functionality-testing)
+    - [Availability CRUD Testing](#availability-crud-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -189,6 +191,9 @@ The application is built using a relational database with the following core mod
 - Frontend edit functionality for updating existing records
 - Frontend delete functionality with confirmation pages to reduce accidental data removal
 
+- Full CRUD functionality implemented across all models (Drivers, Routes, Assignments, Availabilities)
+- Frontend edit and delete functionality for availability records with confirmation pages
+
 ---
 
 ## 🔗 Data Flow and Application Logic
@@ -288,6 +293,14 @@ a- Confirmed that assignment validation also applies during record updates, prev
 - Verified that driver records can be deleted through the frontend  
 - Confirmed that delete confirmation pages display the correct record details  
 - Ensured records are removed from the database and no longer appear in the list view  
+
+### Availability CRUD Testing
+
+- Verified that availability records can be created, viewed, updated, and deleted through the frontend  
+- Confirmed that edit forms pre-populate with existing data and save changes correctly  
+- Tested delete confirmation flow to ensure records are only removed after user confirmation  
+- Ensured deleted records no longer appear in the availability list  
+- Confirmed validation rules continue to apply during updates  
 
 All identified issues were resolved and documented in the Challenges section.
 
