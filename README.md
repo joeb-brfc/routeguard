@@ -348,6 +348,8 @@ The deployed version was tested to ensure it matches the local development versi
 - Bootstrap
 - Online resources and tutorials used for guidance
 - Django documentation, particularly guidance on ModelForms, form validation, and querying related models
+- Django Authentication System (`django.contrib.auth`) used for login, logout, and user management  
+- Django `@login_required` decorator used to protect restricted views  
 
 ---
 
