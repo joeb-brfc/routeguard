@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Route</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Route</button>
+</form>
+
+<p><a href="{% url 'route_list' %}">Back to Routes</a></p>
+
+{% endblock %}

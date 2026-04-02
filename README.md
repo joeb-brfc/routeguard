@@ -187,6 +187,7 @@ The application is built using a relational database with the following core mod
 - Admin panel for backend data management  
 - Assignment validation to prevent duplicate same-day driver bookings
 - Frontend edit functionality for updating existing records
+- Frontend delete functionality with confirmation pages to reduce accidental data removal
 
 ---
 
@@ -280,6 +281,12 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Verified that existing driver records can be edited through the frontend  
 - Confirmed that forms load with existing values pre-filled  
 - Ensured updated data is saved and displayed immediately in the relevant table  
+
+### Delete Functionality Testing
+
+- Verified that driver records can be deleted through the frontend  
+- Confirmed that delete confirmation pages display the correct record details  
+- Ensured records are removed from the database and no longer appear in the list view  
 
 All identified issues were resolved and documented in the Challenges section.
 

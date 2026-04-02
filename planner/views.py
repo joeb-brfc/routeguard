@@ -132,3 +132,31 @@ def delete_driver(request, driver_id):
         "planner/delete_driver.html",
         {"driver": driver},
     )   
+
+def edit_route(request, route_id):
+    route = get_object_or_404(Route, id=route_id)
+
+    if request.method == "POST":
+        form = RouteForm(request.POST, instance=route)
+        if form.is_valid():
+            form.save()
+            return redirect("route_list")
+    else:
+        form = RouteForm(instance=route)
+    return render(
+        request,
+        "planner/edit_route.html",
+        {"form": form, "route": route},
+    )
+
+def delete_route(request, route_id):
+    route = get_object_or_404(Route, id=route_id)
+
+    if request.method == "POST":
+        route.delete()
+        return redirect("route_list")
+    return render(
+        request,
+        "planner/delete_route.html",
+        {"route": route},
+    )

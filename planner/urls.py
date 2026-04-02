@@ -13,4 +13,6 @@ urlpatterns = [
     path("assignments/create/", views.create_assignment, name="create_assignment"),
     path("drivers/<int:driver_id>/edit/", views.edit_driver, name="edit_driver"),
     path("drivers/<int:driver_id>/delete/", views.delete_driver, name="delete_driver"),
+    path("routes/<int:route_id>/edit/", views.edit_route, name="edit_route"),
+    path("routes/<int:route_id>/delete/", views.delete_route, name="delete_route"),
 ]

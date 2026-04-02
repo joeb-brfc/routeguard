@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Delete Route</h2>
+
+<p>Are you sure you want to delete {{ route.name }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete Route</button>
+</form>
+
+<p><a href="{% url 'route_list' %}">Cancel</a></p>
+
+{% endblock %}
