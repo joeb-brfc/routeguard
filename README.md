@@ -34,6 +34,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Update Functionality Testing](#update-functionality-testing)
     - [Delete Functionality Testing](#delete-functionality-testing)
     - [Availability CRUD Testing](#availability-crud-testing)
+    - [User Feedback Testing](#user-feedback-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -47,9 +48,11 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Missing Form Import in View](#missing-form-import-in-view)
     - [Missing Redirect Import in View](#missing-redirect-import-in-view)
     - [🧾 Form Handling and View Integration Issues](#-form-handling-and-view-integration-issues)
-    - [🛠️ Edit View Errors and Debugging](#️-edit-view-errors-and-debugging)
+    - [Edit View Errors and Debugging](#edit-view-errors-and-debugging)
       - [Issues encountered](#issues-encountered)
       - [How I fixed it](#how-i-fixed-it)
+    - [Availability Delete URL Error](#availability-delete-url-error)
+    - [Incorrect Messages Import](#incorrect-messages-import)
 
 ## 📌 Overview
 
@@ -193,6 +196,7 @@ The application is built using a relational database with the following core mod
 
 - Full CRUD functionality implemented across all models (Drivers, Routes, Assignments, Availabilities)
 - Frontend edit and delete functionality for availability records with confirmation pages
+- User feedback messages displayed after create, update, and delete actions to improve user experience
 
 ---
 
@@ -301,6 +305,12 @@ a- Confirmed that assignment validation also applies during record updates, prev
 - Tested delete confirmation flow to ensure records are only removed after user confirmation  
 - Ensured deleted records no longer appear in the availability list  
 - Confirmed validation rules continue to apply during updates  
+
+### User Feedback Testing
+
+- Verified that success messages are displayed after creating, updating, and deleting records  
+- Confirmed messages appear consistently across all models (Drivers, Routes, Assignments, Availabilities)  
+- Ensured messages improve user feedback and confirm successful actions  
 
 All identified issues were resolved and documented in the Challenges section.
 
@@ -470,7 +480,7 @@ Issues included:
 
 This reinforced understanding of how Django processes form submissions and connects forms, views, and templates.
 
-### 🛠️ Edit View Errors and Debugging
+### Edit View Errors and Debugging
 
 While building the driver edit (update) functionality, I ran into a couple of issues related to URL parameters and missing imports.
 
@@ -500,3 +510,48 @@ Outcome
 The edit page now loads correctly and allows existing drivers to be updated
 Improved my understanding of how Django passes URL parameters into views
 Reinforced the importance of consistent naming and remembering required imports
+
+### Availability Delete URL Error
+
+During implementation of delete functionality for availability records, a `NoReverseMatch` error occurred:
+
+Reverse for 'delete_availability' not found
+
+
+This was caused by a mismatch between the URL name defined in `urls.py` and the name referenced in the template.
+
+**To resolve this:**
+
+- Ensured the URL pattern included:
+  ```python
+  name="delete_availability"
+
+Verified that the template used the exact same name:
+
+{% url 'delete_availability' availability.id %}
+Confirmed all files were saved and the development server was reloaded
+
+This reinforced the importance of consistent naming between Django views, URLs, and templates.
+
+### Incorrect Messages Import
+
+While implementing user feedback messages, an `ImportError` occurred when attempting to run the server:
+
+ImportError: cannot import name 'messages' from 'django.shortcuts'
+
+
+This was caused by incorrectly importing `messages` from `django.shortcuts` instead of the correct Django module.
+
+**To resolve this:**
+
+- Updated the import statements in `views.py`:
+  ```python
+  from django.shortcuts import render, redirect, get_object_or_404
+  from django.contrib import messages
+
+  Restarted the development server to apply changes
+
+Outcome:
+
+Success messages were displayed correctly after create, update, and delete actions
+Improved understanding of Django module structure and correct import usage
