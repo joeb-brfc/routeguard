@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Assignment, Driver, Route, Availability
 from .forms import AssignmentForm, AvailabilityForm, DriverForm, RouteForm
+from django.contrib import messages
 
 
 def home(request):
@@ -44,6 +45,7 @@ def create_driver(request):
         form = DriverForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Driver created successfully")
             return redirect("driver_list")
     else:
         form = DriverForm()
@@ -59,6 +61,7 @@ def create_route(request):
         form = RouteForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Route created successfully")
             return redirect("route_list")
     else:
         form = RouteForm()
@@ -74,6 +77,7 @@ def create_availability(request):
         form = AvailabilityForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Availability created successfully")
             return redirect("availability_list")
     else:
         form = AvailabilityForm()
@@ -89,6 +93,7 @@ def create_assignment(request):
         form = AssignmentForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Assignment created successfully")
             return redirect("assignment_list")
     else:
         form = AssignmentForm()
@@ -108,6 +113,7 @@ def edit_driver(request, driver_id):
         form = DriverForm(request.POST, instance=driver)
         if form.is_valid():
             form.save()
+            messages.success(request, "Driver updated successfully")
             return redirect("driver_list")
     else:
         #On first load, show form filled with the driver's current data
@@ -125,6 +131,7 @@ def delete_driver(request, driver_id):
     if request.method == "POST":
         # If the user confirms deletion, delete the driver
         driver.delete()
+        messages.success(request, "Driver deleted successfully")
         return redirect("driver_list")
     # If the page is opened normally, show the confirmation template
     return render(
@@ -140,6 +147,7 @@ def edit_route(request, route_id):
         form = RouteForm(request.POST, instance=route)
         if form.is_valid():
             form.save()
+            messages.success(request, "Route updated successfully")
             return redirect("route_list")
     else:
         form = RouteForm(instance=route)
@@ -154,6 +162,7 @@ def delete_route(request, route_id):
 
     if request.method == "POST":
         route.delete()
+        messages.success(request, "Route deleted successfully")
         return redirect("route_list")
     return render(
         request,
@@ -168,6 +177,7 @@ def edit_assignment(request, assignment_id):
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             form.save()
+            messages.success(request, "Assignment updated successfully")
             return redirect("assignment_list")
     else:
         form = AssignmentForm(instance=assignment)
@@ -182,6 +192,7 @@ def delete_assignment(request, assignment_id):
 
     if request.method == "POST":
         assignment.delete()
+        messages.success(request, "Assignment deleted successfully")
         return redirect("assignment_list")
     return render(
         request,
@@ -196,6 +207,7 @@ def edit_availability(request, availability_id):
         form = AvailabilityForm(request.POST, instance=availability)
         if form.is_valid():
             form.save()
+            messages.success(request, "Availability updated successfully")
             return redirect("availability_list")
     else:
         form = AvailabilityForm(instance=availability)
@@ -210,6 +222,7 @@ def delete_availability(request, availability_id):
 
     if request.method == "POST":
         availability.delete()
+        messages.success(request, "Availability deleted successfully")
         return redirect("availability_list")
 
     return render(
