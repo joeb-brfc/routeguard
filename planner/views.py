@@ -117,3 +117,18 @@ def edit_driver(request, driver_id):
         "planner/edit_driver.html",
         {"form": form, "driver": driver},
     )
+
+def delete_driver(request, driver_id):
+    # Find the driver by id, or return a 404 page if it does not exist
+    driver = get_object_or_404(Driver, id=driver_id)
+
+    if request.method == "POST":
+        # If the user confirms deletion, delete the driver
+        driver.delete()
+        return redirect("driver_list")
+    # If the page is opened normally, show the confirmation template
+    return render(
+        request,
+        "planner/delete_driver.html",
+        {"driver": driver},
+    )   

@@ -465,6 +465,7 @@ This happened because the URL was passing `driver_id`, but the view function was
 #### How I fixed it
 
 - Updated the view function to match the URL parameter:
+
 ```python
 def edit_driver(request, driver_id):
 
@@ -474,6 +475,7 @@ Added the missing import:
 from django.shortcuts import get_object_or_404
 
 Outcome
+
 The edit page now loads correctly and allows existing drivers to be updated
 Improved my understanding of how Django passes URL parameters into views
 Reinforced the importance of consistent naming and remembering required imports
