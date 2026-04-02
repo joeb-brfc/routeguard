@@ -19,5 +19,6 @@ urlpatterns = [
     path("assignments/<int:assignment_id>/delete/", views.delete_assignment, name="delete_assignment"),
     path("availabilities/<int:availability_id>/edit/", views.edit_availability, name="edit_availability"),
     path("availabilities/<int:availability_id>/delete/", views.delete_availability, name="delete_availability"),
+    path("signup/", views.signup, name="signup"),
     
 ]
