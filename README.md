@@ -6,6 +6,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
 
 - [RouteGuard](#routeguard)
   - [Table of Contents](#table-of-contents)
+  - [Live Application](#live-application)
   - [Overview](#overview)
   - [Project Purpose](#project-purpose)
   - [Target Users](#target-users)
@@ -37,7 +38,11 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [User Feedback Testing](#user-feedback-testing)
     - [UI Polish Testing](#ui-polish-testing)
     - [Authentication Testing](#authentication-testing)
+    - [Live Deployment Testing](#live-deployment-testing)
   - [Deployment](#deployment)
+    - [Deployment Steps](#deployment-steps)
+      - [Environment Variables](#environment-variables)
+      - [Notes](#notes)
   - [Credits](#credits)
   - [Challenges Faced \& Solutions](#challenges-faced--solutions)
     - [Template Structure and Inheritance Issues](#template-structure-and-inheritance-issues)
@@ -57,6 +62,24 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Availability Delete URL Error](#availability-delete-url-error)
     - [Incorrect Messages Import](#incorrect-messages-import)
       - [Messages Import Outcome](#messages-import-outcome)
+  - [Additional Deployment Challenges](#additional-deployment-challenges)
+    - [Deployment Issue: Missing `dj_database_url`](#deployment-issue-missing-dj_database_url)
+    - [Deployment Issue: Invalid Heroku App Name](#deployment-issue-invalid-heroku-app-name)
+    - [Deployment Issue: Virtual Environment Included in Repository](#deployment-issue-virtual-environment-included-in-repository)
+    - [Deployment Issue: Static Files Configuration Error](#deployment-issue-static-files-configuration-error)
+    - [Deployment Issue: Gunicorn Not Installed](#deployment-issue-gunicorn-not-installed)
+    - [Deployment Issue: Missing WhiteNoise Dependency](#deployment-issue-missing-whitenoise-dependency)
+    - [Deployment Issue: Application Crash After Successful Build](#deployment-issue-application-crash-after-successful-build)
+  - [Deployment Insight](#deployment-insight)
+  - [Conclusion](#conclusion)
+
+## Live Application
+
+The deployed application can be accessed here:
+
+[RouteGuard Live Site](https://routeguard-4a6f16cc8505.herokuapp.com/)
+
+---
 
 ## Overview
 
@@ -321,23 +344,65 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Tested protected create, update, and delete pages to ensure unauthenticated users are redirected to the login page
 - Confirmed authenticated users can access protected functionality normally
 
+### Live Deployment Testing
+
+- Verified that the deployed Heroku application loads successfully
+- Confirmed that static files such as CSS are served correctly in production
+- Tested login, logout, and signup functionality on the live site
+- Confirmed that CRUD functionality works as expected on the deployed version
+- Verified that validation rules continue to work in production
+- Confirmed that protected pages redirect unauthenticated users to the login page
+
 All identified issues were resolved and documented in the Challenges section.
 
 ---
 
 ## Deployment
 
-The application was deployed using Heroku.
+The application was deployed to Heroku using Git and the Heroku CLI.
 
-Steps included:
+### Deployment Steps
 
-- Creating a Heroku app
-- Configuring environment variables
-- Setting up a PostgreSQL database
-- Pushing code via GitHub
-- Running migrations on the live environment
+1. Created a Heroku application
+2. Added deployment-related packages including:
+   - `gunicorn`
+   - `whitenoise`
+   - `dj-database-url`
+3. Updated `requirements.txt` to ensure all dependencies were included
+4. Created a `Procfile` to define the web process:
 
-The deployed version was tested to ensure it matches the local development version.
+```Procfile
+web: gunicorn config.wsgi
+```
+
+1. Updated `settings.py` for deployment by:
+   - moving `SECRET_KEY` to an environment variable
+   - controlling `DEBUG` with an environment variable
+   - adding Heroku-compatible `ALLOWED_HOSTS`
+   - configuring static files using `STATIC_ROOT`
+2. Added Heroku config vars for:
+   - `SECRET_KEY`
+   - `DEBUG`
+3. Removed the local virtual environment folder from version control and added `.venv/` to `.gitignore`
+4. Pushed the project to Heroku using:
+
+```bash
+git push heroku main
+```
+
+1. Ran migrations on the deployed application
+2. Tested the live application to ensure that pages, authentication, CRUD features, validation, and styling all worked as expected
+
+#### Environment Variables
+
+The following environment variables were used in deployment:
+
+- `SECRET_KEY`
+- `DEBUG`
+
+#### Notes
+
+The production version uses a different environment from local development, so several deployment-specific issues had to be resolved before the application ran correctly on Heroku.
 
 ---
 
@@ -350,6 +415,8 @@ The deployed version was tested to ensure it matches the local development versi
 - Django documentation, particularly guidance on ModelForms, form validation, and querying related models
 - Django Authentication System (`django.contrib.auth`) used for login, logout, and user management  
 - Django `@login_required` decorator used to protect restricted views  
+- Heroku documentation and deployment guidance
+- Django documentation, particularly guidance on production settings and static files
 
 ---
 
@@ -589,3 +656,151 @@ from django.contrib import messages
 
 - Success messages were displayed correctly after create, update, and delete actions
 - Improved understanding of Django module structure and correct import usage
+
+---
+
+## Additional Deployment Challenges
+
+### Deployment Issue: Missing `dj_database_url`
+
+While preparing the application for deployment, the local server failed to run after `dj_database_url` was imported into `settings.py`.
+
+The error occurred because the package had been referenced before it had been installed into the virtual environment.
+
+**To resolve this:**
+
+```bash
+pip install dj-database-url
+```
+
+- Regenerated `requirements.txt`
+- Retested the application locally before redeploying
+
+This reinforced the importance of keeping installed dependencies aligned with imports used in the project settings.
+
+---
+
+### Deployment Issue: Invalid Heroku App Name
+
+During setup, an attempt was made to create a Heroku app using the placeholder command:
+
+```bash
+heroku create your-app-name
+```
+
+This failed because `your-app-name` was treated as the actual application name and was already unavailable.
+
+**To resolve this:**
+
+- Created the Heroku app using a unique name instead
+- Confirmed that the Heroku remote was added to the local repository
+
+This highlighted the importance of replacing template deployment commands with project-specific values.
+
+---
+
+### Deployment Issue: Virtual Environment Included in Repository
+
+When pushing the project to Heroku, the build was rejected because the local `.venv` directory had been committed to the Git repository.
+
+Heroku does not allow local virtual environments to be deployed because they are machine-specific.
+
+**To resolve this:**
+
+```bash
+git rm --cached -r .venv
+```
+
+- Added `.venv/` to `.gitignore`
+- Recommitted the changes and pushed again
+
+This reinforced the importance of excluding local environment files from deployment.
+
+---
+
+### Deployment Issue: Static Files Configuration Error
+
+During deployment, Heroku failed while running `collectstatic`.
+
+This was caused by incomplete static files configuration in `settings.py`, particularly the missing `STATIC_ROOT` setting required for production.
+
+**To resolve this:**
+
+```python
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+```
+
+- Retested static file handling before redeploying
+
+This improved understanding of the differences between local and production static file handling.
+
+---
+
+### Deployment Issue: Gunicorn Not Installed
+
+After deployment, the application crashed because Heroku could not find the Gunicorn web server.
+
+**To resolve this:**
+
+```bash
+pip install gunicorn
+```
+
+- Updated `requirements.txt`
+- Redeployed the application
+
+---
+
+### Deployment Issue: Missing WhiteNoise Dependency
+
+After adding `WhiteNoiseMiddleware`, the application crashed with a `ModuleNotFoundError`.
+
+**To resolve this:**
+
+```bash
+pip install whitenoise
+```
+
+- Updated `requirements.txt`
+- Redeployed the application
+
+---
+
+### Deployment Issue: Application Crash After Successful Build
+
+At one stage, the project deployed successfully but still showed a Heroku error page.
+
+This required checking logs:
+
+```bash
+heroku logs --tail
+```
+
+**To resolve this:**
+
+- Identified runtime errors from logs
+- Installed missing dependencies
+- Redeployed until successful
+
+This demonstrated the importance of distinguishing between build success and runtime success.
+
+---
+
+## Deployment Insight
+
+The production deployment process required additional configuration beyond local development, including:
+
+- Environment variables
+- Static file handling
+- Dependency management
+- Heroku-specific deployment setup
+
+## Conclusion
+
+RouteGuard was successfully developed and deployed as a full-stack Django application that supports real-world logistics planning tasks. The project includes full CRUD functionality, authentication, validation, user feedback, and deployment to a live environment.
+
+Throughout development and deployment, several issues were identified and resolved, strengthening the final application and improving understanding of Django, Git, and Heroku workflows.
+
+Future improvements have been identified to expand the project further, particularly around more advanced driver-hours logic and planning intelligence.
