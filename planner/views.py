@@ -3,6 +3,7 @@ from .models import Assignment, Driver, Route, Availability
 from .forms import AssignmentForm, AvailabilityForm, DriverForm, RouteForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -41,6 +42,7 @@ def availability_list(request):
         {"availabilities": availabilities},
     )
 
+@login_required
 def create_driver(request):
     if request.method == "POST":
         form = DriverForm(request.POST)
@@ -57,6 +59,7 @@ def create_driver(request):
         {"form": form},
     )
 
+@login_required
 def create_route(request):
     if request.method == "POST":
         form = RouteForm(request.POST)
@@ -73,6 +76,7 @@ def create_route(request):
         {"form": form},
     )
 
+@login_required
 def create_availability(request):
     if request.method == "POST":
         form = AvailabilityForm(request.POST)
@@ -89,6 +93,7 @@ def create_availability(request):
         {"form": form},
     )
 
+@login_required
 def create_assignment(request):
     if request.method == "POST":
         form = AssignmentForm(request.POST)
@@ -105,6 +110,7 @@ def create_assignment(request):
         {"form": form},
     )
 
+@login_required
 def edit_driver(request, driver_id):
     #Get the specific driver by id or return 404 if not found
     driver = get_object_or_404(Driver, id=driver_id)
@@ -125,6 +131,7 @@ def edit_driver(request, driver_id):
         {"form": form, "driver": driver},
     )
 
+@login_required
 def delete_driver(request, driver_id):
     # Find the driver by id, or return a 404 page if it does not exist
     driver = get_object_or_404(Driver, id=driver_id)
@@ -141,6 +148,7 @@ def delete_driver(request, driver_id):
         {"driver": driver},
     )   
 
+@login_required
 def edit_route(request, route_id):
     route = get_object_or_404(Route, id=route_id)
 
@@ -158,6 +166,7 @@ def edit_route(request, route_id):
         {"form": form, "route": route},
     )
 
+@login_required
 def delete_route(request, route_id):
     route = get_object_or_404(Route, id=route_id)
 
@@ -171,6 +180,7 @@ def delete_route(request, route_id):
         {"route": route},
     )
 
+@login_required
 def edit_assignment(request, assignment_id):
     assignment = get_object_or_404(Assignment, id=assignment_id)
 
@@ -188,6 +198,7 @@ def edit_assignment(request, assignment_id):
         {"form": form, "assignment": assignment},
     )
 
+@login_required
 def delete_assignment(request, assignment_id):
     assignment = get_object_or_404(Assignment, id=assignment_id)
 
@@ -201,6 +212,7 @@ def delete_assignment(request, assignment_id):
         {"assignment": assignment},
     )
 
+@login_required
 def edit_availability(request, availability_id):
     availability = get_object_or_404(Availability, id=availability_id)
 
@@ -218,6 +230,7 @@ def edit_availability(request, availability_id):
         {"form": form, "availability": availability},
     )
 
+@login_required
 def delete_availability(request, availability_id):
     availability = get_object_or_404(Availability, id=availability_id)
 
