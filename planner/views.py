@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Assignment, Driver, Route, Availability
 from .forms import AssignmentForm, AvailabilityForm, DriverForm, RouteForm
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 
 def home(request):
@@ -230,3 +231,14 @@ def delete_availability(request, availability_id):
         "planner/delete_availability.html",
         {"availability": availability},
     )
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Account created successfully. Please log in.")
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/signup.html", {"form": form})
