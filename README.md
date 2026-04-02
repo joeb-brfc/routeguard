@@ -36,6 +36,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Availability CRUD Testing](#availability-crud-testing)
     - [User Feedback Testing](#user-feedback-testing)
     - [UI Polish Testing](#ui-polish-testing)
+    - [Authentication Testing](#authentication-testing)
   - [🚀 Deployment](#-deployment)
   - [🙌 Credits](#-credits)
   - [⚠️ Challenges Faced \& Solutions](#️-challenges-faced--solutions)
@@ -202,6 +203,8 @@ The application is built using a relational database with the following core mod
 - User feedback messages displayed after create, update, and delete actions to improve user experience
 - Consistent styling applied across CRUD pages for improved readability and usability
 - Success messages displayed clearly after create, update, and delete actions
+- User authentication with signup, login, and logout functionality
+- Protected create, update, and delete views so only authenticated users can modify data
 
 ---
 
@@ -321,7 +324,14 @@ a- Confirmed that assignment validation also applies during record updates, prev
 
 - Verified that shared styling was applied consistently across all main pages  
 - Confirmed that tables, navigation, and success messages display clearly  
-- Checked that descriptive page text improves clarity without affecting functionality    
+- Checked that descriptive page text improves clarity without affecting functionality
+
+### Authentication Testing
+
+- Verified that new users can register using the signup form
+- Confirmed that existing users can log in and log out successfully
+- Tested protected create, update, and delete pages to ensure unauthenticated users are redirected to the login page
+- Confirmed authenticated users can access protected functionality normally
 
 All identified issues were resolved and documented in the Challenges section.
 
