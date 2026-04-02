@@ -211,6 +211,7 @@ def delete_availability(request, availability_id):
     if request.method == "POST":
         availability.delete()
         return redirect("availability_list")
+
     return render(
         request,
         "planner/delete_availability.html",
