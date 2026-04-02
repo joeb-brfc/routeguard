@@ -188,3 +188,19 @@ def delete_assignment(request, assignment_id):
         "planner/delete_assignment.html",
         {"assignment": assignment},
     )
+
+def edit_availability(request, availability_id):
+    availability = get_object_or_404(Availability, id=availability_id)
+
+    if request.method == "POST":
+        form = AvailabilityForm(request.POST, instance=availability)
+        if form.is_valid():
+            form.save()
+            return redirect("availability_list")
+    else:
+        form = AvailabilityForm(instance=availability)
+    return render(
+        request,
+        "planner/edit_availability.html",
+        {"form": form, "availability": availability},
+    )

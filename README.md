@@ -275,6 +275,7 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Confirmed that drivers marked as unavailable cannot be assigned on that date  
 - Tested that drivers cannot be assigned more than once on the same date  
 - Confirmed that validation errors are displayed clearly to the user on the form  
+a- Confirmed that assignment validation also applies during record updates, preventing a driver from being edited onto an unavailable date
 
 ### Update Functionality Testing
 
