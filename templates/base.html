@@ -16,18 +16,25 @@
         <a href="{% url 'driver_list' %}">Drivers</a>
         <a href="{% url 'route_list' %}">Routes</a>
         <a href="{% url 'availability_list' %}">Availabilities</a>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
       </nav>
       <hr />
     </header>
 
     <main>
-{% if messages %}
-    <ul class="message-list">
+      {% if messages %}
+      <ul class="message-list">
         {% for message in messages %}
-            <li>{{ message }}</li>
+        <li>{{ message }}</li>
         {% endfor %}
-    </ul>
-{% endif %} {% block content %} {% endblock %}
+      </ul>
+      {% endif %} {% block content %} {% endblock %}
     </main>
   </body>
 </html>
