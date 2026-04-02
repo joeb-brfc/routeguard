@@ -24,6 +24,8 @@
                     <td>{{ driver.active }}</td>
                     <td>
                         <a href="{% url 'edit_driver' driver.id %}">Edit</a>
+                        |
+                        <a href="{% url 'delete_driver' driver.id %}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
