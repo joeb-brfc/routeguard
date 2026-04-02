@@ -12,4 +12,5 @@ urlpatterns = [
     path("availabilities/create/", views.create_availability, name="create_availability"),
     path("assignments/create/", views.create_assignment, name="create_assignment"),
     path("drivers/<int:driver_id>/edit/", views.edit_driver, name="edit_driver"),
+    path("drivers/<int:driver_id>/delete/", views.delete_driver, name="delete_driver"),
 ]
