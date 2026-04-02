@@ -204,3 +204,15 @@ def edit_availability(request, availability_id):
         "planner/edit_availability.html",
         {"form": form, "availability": availability},
     )
+
+def delete_availability(request, availability_id):
+    availability = get_object_or_404(Availability, id=availability_id)
+
+    if request.method == "POST":
+        availability.delete()
+        return redirect("availability_list")
+    return render(
+        request,
+        "planner/delete_availability.html",
+        {"availability": availability},
+    )
