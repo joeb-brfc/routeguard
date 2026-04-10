@@ -49,6 +49,9 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [UI Polish Testing](#ui-polish-testing)
     - [Authentication Testing](#authentication-testing)
     - [Live Deployment Testing](#live-deployment-testing)
+    - [HTML Validation](#html-validation)
+    - [CSS Validation](#css-validation)
+    - [Lighthouse Testing](#lighthouse-testing)
   - [Deployment](#deployment)
     - [Deployment Steps](#deployment-steps)
       - [Environment Variables](#environment-variables)
@@ -422,6 +425,24 @@ Manual testing was carried out throughout development to ensure functionality, u
 
 All identified issues were resolved and documented in the Challenges section.
 
+### HTML Validation
+
+![HTML](docs/screenshots/html-validator.png)
+
+HTML templates were tested using the W3C Markup Validation Service. Minor issues were identified and corrected during development.
+
+### CSS Validation
+
+![CSS](docs/screenshots/css-validator.png)
+
+The stylesheet was tested using the W3C CSS Validation Service to confirm valid CSS syntax.
+
+### Lighthouse Testing
+
+![Lighthouse](docs/screenshots/lighthouse.png)
+
+Lighthouse testing was carried out in Chrome Developer Tools to review performance, accessibility, best practices, and SEO. The results helped identify frontend improvements and confirm that the site follows good usability standards.
+
 ---
 
 ## Deployment
@@ -486,6 +507,9 @@ The production version uses a different environment from local development, so s
 - Django documentation, particularly guidance on production settings and static files
 - Django documentation was used for guidance on template logic, including conditional rendering and use of `request.path` within templates
 - CSS styling guidance for table row striping using the `:nth-child` pseudo-class was referenced from GeeksforGeeks
+- VS Code Markdown Preview tools were used to review README formatting and structure
+- markdownlint was used to help improve README structure and formatting consistency
+- Markdown Preview Mermaid Support was used to assist with previewing and checking markdown formatting during README development
 
 ---
 
