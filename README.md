@@ -22,6 +22,8 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Assignment](#assignment)
     - [Relationships](#relationships)
   - [Features](#features)
+  - [Screenshots](#screenshots)
+    - [Homepage](#homepage)
   - [Data Flow and Application Logic](#data-flow-and-application-logic)
   - [Future Features](#future-features)
   - [Technologies Used](#technologies-used)
@@ -213,6 +215,18 @@ The application is built using a relational database with the following core mod
 - Success messages displayed clearly after create, update, and delete actions
 - User authentication with signup, login, and logout functionality
 - Protected create, update, and delete views so only authenticated users can modify data
+
+---
+
+## Screenshots
+
+### Homepage
+
+![Homepage](docs/screenshots/homepage.png)
+
+The homepage introduces RouteGuard and provides access to the main areas of the application.
+
+
 
 ---
 
