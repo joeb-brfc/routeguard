@@ -64,7 +64,6 @@ A Django-based logistics planning application for managing drivers, routes, and 
       - [Messages Import Outcome](#messages-import-outcome)
   - [Additional Deployment Challenges](#additional-deployment-challenges)
     - [Deployment Issue: Missing `dj_database_url`](#deployment-issue-missing-dj_database_url)
-    - [Deployment Issue: Invalid Heroku App Name](#deployment-issue-invalid-heroku-app-name)
     - [Deployment Issue: Virtual Environment Included in Repository](#deployment-issue-virtual-environment-included-in-repository)
     - [Deployment Issue: Static Files Configuration Error](#deployment-issue-static-files-configuration-error)
     - [Deployment Issue: Gunicorn Not Installed](#deployment-issue-gunicorn-not-installed)
@@ -410,13 +409,15 @@ The production version uses a different environment from local development, so s
 
 - Django documentation
 - Code Institute learning materials
-- Bootstrap
 - Online resources and tutorials used for guidance
+- Visual Studio Code was used as the primary development environment, including features such as IntelliSense and auto-completion to support efficient coding
 - Django documentation, particularly guidance on ModelForms, form validation, and querying related models
 - Django Authentication System (`django.contrib.auth`) used for login, logout, and user management  
 - Django `@login_required` decorator used to protect restricted views  
 - Heroku documentation and deployment guidance
 - Django documentation, particularly guidance on production settings and static files
+- Django documentation was used for guidance on template logic, including conditional rendering and use of `request.path` within templates
+- CSS styling guidance for table row striping using the `:nth-child` pseudo-class was referenced from GeeksforGeeks
 
 ---
 
@@ -677,25 +678,6 @@ pip install dj-database-url
 - Retested the application locally before redeploying
 
 This reinforced the importance of keeping installed dependencies aligned with imports used in the project settings.
-
----
-
-### Deployment Issue: Invalid Heroku App Name
-
-During setup, an attempt was made to create a Heroku app using the placeholder command:
-
-```bash
-heroku create your-app-name
-```
-
-This failed because `your-app-name` was treated as the actual application name and was already unavailable.
-
-**To resolve this:**
-
-- Created the Heroku app using a unique name instead
-- Confirmed that the Heroku remote was added to the local repository
-
-This highlighted the importance of replacing template deployment commands with project-specific values.
 
 ---
 

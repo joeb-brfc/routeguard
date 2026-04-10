@@ -71,3 +71,13 @@ button {
     border: 1px solid #cce5cc;
     background-color: #eaf7ea;
 }
+
+nav a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Active page */
+nav a.active {
+    border-bottom: 2px solid blue;
+}
