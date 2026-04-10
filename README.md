@@ -24,6 +24,14 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [Features](#features)
   - [Screenshots](#screenshots)
     - [Homepage](#homepage)
+    - [Driver Management](#driver-management)
+    - [Route Management](#route-management)
+    - [Availability Management](#availability-management)
+    - [Assignment Management](#assignment-management)
+    - [Record Creation Form](#record-creation-form)
+    - [Edit Functionality](#edit-functionality)
+    - [Delete Confirmation](#delete-confirmation)
+    - [Authentication](#authentication)
   - [Data Flow and Application Logic](#data-flow-and-application-logic)
   - [Future Features](#future-features)
   - [Technologies Used](#technologies-used)
@@ -226,7 +234,53 @@ The application is built using a relational database with the following core mod
 
 The homepage introduces RouteGuard and provides access to the main areas of the application.
 
+### Driver Management
 
+![Driver Management](docs/screenshots/drivers.png)
+
+The driver page displays driver records and provides create, edit, and delete functionality.
+
+### Route Management
+
+![Route Management](docs/screenshots/routes.png)
+
+The route page allows users to manage route details including destination and estimated hours.
+
+### Availability Management
+
+![Availability Management](docs/screenshots/availabilities.png)
+
+The availability page allows users to record and manage driver availability by date and status.
+
+### Assignment Management
+
+![Assignment Management](docs/screenshots/assignments.png)
+
+The assignment page shows driver-route assignments and displays key scheduling information.
+
+### Record Creation Form
+
+![Create Form](docs/screenshots/create-form.png)
+
+Frontend forms allow users to create records directly from the application.
+
+### Edit Functionality
+
+![Edit Functionality](docs/screenshots/edit-form.png)
+
+Existing records can be updated through pre-filled edit forms.
+
+### Delete Confirmation
+
+![Delete Confirmation](docs/screenshots/delete-confirmation.png)
+
+Delete confirmation pages help prevent accidental removal of records.
+
+### Authentication
+
+![Authentication](docs/screenshots/login.png)
+
+User authentication was implemented to protect restricted functionality.
 
 ---
 
