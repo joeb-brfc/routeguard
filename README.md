@@ -90,7 +90,7 @@ The deployed application can be accessed here:
 
 RouteGuard is a full-stack Django web application designed to support logistics planning by managing drivers, routes, availability, and assignments.
 
-The system allows users to create and manage a shared dataset, ensuring that drivers are assigned efficiently while avoiding scheduling conflicts and highlighting potential planning risks.
+It provides a central system for creating, updating, and viewing planning data through a structured and user-friendly interface.
 
 ---
 
@@ -102,10 +102,10 @@ This application aims to:
 
 - Improve visibility of driver availability
 - Prevent scheduling conflicts
-- Provide simple feedback on assignment risk
 - Streamline the planning process
+- Provide clear user feedback during record management
 
-The project is inspired by real-world logistics operations, where planning efficiency and compliance are critical.
+The project is inspired by real-world logistics operations, where planning efficiency and accuracy are important.
 
 ---
 
@@ -130,17 +130,15 @@ These users require a system that allows them to:
 
 The application is designed with simplicity and clarity in mind:
 
-- A clear navigation structure allows users to easily move between drivers, routes, and assignments
+- A clear navigation structure allows users to move easily between drivers, routes, and assignments
 - Forms are used for creating and updating records
-- Immediate feedback is provided after actions (e.g. success messages, validation errors)
-- The layout is responsive and accessible across different screen sizes
+- Immediate feedback is provided after actions, such as success messages and validation errors
 - Data is displayed in structured tables to improve clarity and usability
 - Users can create new records directly from the interface without using the admin panel
-- Users receive immediate visual feedback through updated tables after submitting data
 - Shared styling was applied across navigation, tables, forms, and messages to improve visual consistency
 - Brief descriptive text was added to key pages to help users understand the purpose of each section
 
-The goal is to ensure that users can perform tasks quickly without confusion.
+The goal is to ensure that users can complete common planning tasks quickly and clearly.
 
 ---
 
