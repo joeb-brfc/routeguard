@@ -2,10 +2,10 @@
 
 A Django-based logistics planning application for managing drivers, routes, and scheduling.
 
-## Table of Contents
+## Table of Contents (TOC)
 
 - [RouteGuard](#routeguard)
-  - [Table of Contents](#table-of-contents)
+  - [Table of Contents (TOC)](#table-of-contents-toc)
   - [Live Application](#live-application)
   - [Overview](#overview)
   - [Project Purpose](#project-purpose)
@@ -62,26 +62,19 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [File Structure Organisation](#file-structure-organisation)
     - [URL Routing Configuration](#url-routing-configuration)
     - [Template Rendering Output Issues](#template-rendering-output-issues)
-    - [Key Learning Outcomes](#key-learning-outcomes)
     - [Data Not Displaying in Templates](#data-not-displaying-in-templates)
     - [Missing Form Import in View](#missing-form-import-in-view)
     - [Missing Redirect Import in View](#missing-redirect-import-in-view)
     - [Form Handling and View Integration Issues](#form-handling-and-view-integration-issues)
     - [Edit View Errors and Debugging](#edit-view-errors-and-debugging)
-      - [Issues encountered](#issues-encountered)
-      - [How I fixed it](#how-i-fixed-it)
-      - [Edit View Outcome](#edit-view-outcome)
     - [Availability Delete URL Error](#availability-delete-url-error)
     - [Incorrect Messages Import](#incorrect-messages-import)
-      - [Messages Import Outcome](#messages-import-outcome)
-  - [Additional Deployment Challenges](#additional-deployment-challenges)
     - [Deployment Issue: Missing `dj_database_url`](#deployment-issue-missing-dj_database_url)
     - [Deployment Issue: Virtual Environment Included in Repository](#deployment-issue-virtual-environment-included-in-repository)
     - [Deployment Issue: Static Files Configuration Error](#deployment-issue-static-files-configuration-error)
     - [Deployment Issue: Gunicorn Not Installed](#deployment-issue-gunicorn-not-installed)
     - [Deployment Issue: Missing WhiteNoise Dependency](#deployment-issue-missing-whitenoise-dependency)
     - [Deployment Issue: Application Crash After Successful Build](#deployment-issue-application-crash-after-successful-build)
-  - [Deployment Insight](#deployment-insight)
     - [JavaScript Message Dismissal Issue](#javascript-message-dismissal-issue)
   - [Conclusion](#conclusion)
 
@@ -219,6 +212,7 @@ The application is built using a relational database with the following core mod
 - Protected create, update, and delete views so only authenticated users can modify data
 - Admin panel for backend data management
 - Responsive layout using HTML and CSS
+- JavaScript used to enhance user experience by automatically dismissing feedback messages after a short delay
 
 ---
 
@@ -494,6 +488,7 @@ The following environment variables were used in deployment:
 - GeeksforGeeks for guidance on CSS `:nth-child` pseudo-class usage for alternating table row styling
 - Visual Studio Code was used as the primary development environment, including IntelliSense and auto-completion features
 - VS Code Markdown Preview tools, Markdown Preview Mermaid Support, and markdownlint were used to help structure and format the README
+- JavaScript `setTimeout` functionality was implemented to enhance user experience, inspired by general JavaScript learning resources such as Mimo (https://mimo.org/glossary/javascript/settimeout)
 
 ---
 
@@ -501,41 +496,29 @@ The following environment variables were used in deployment:
 
 ### Template Structure and Inheritance Issues
 
-During development, an issue occurred where Django could not locate the base template (`TemplateDoesNotExist: base.html`). This was caused by an incorrect configuration of template directories and inconsistent file structure between project-level and app-level templates.
+Django was unable to locate the base template (`TemplateDoesNotExist: base.html`) due to incorrect template directory configuration and inconsistent file structure.
 
-**To resolve this:**
+This was resolved by defining a global `templates` directory in `settings.py`, organising app templates within `planner/templates/planner/`, and placing `base.html` in the root templates directory.
 
-- A global `templates` directory was configured in `settings.py` using the `DIRS` setting
-- App-specific templates were organised into `planner/templates/planner/`
-- The `base.html` file was placed in the root templates directory to allow reuse across the application
-
-This ensured that template inheritance using `{% extends "base.html" %}` functioned correctly.
+This ensured template inheritance using `{% extends "base.html" %}` worked correctly.
 
 ---
 
 ### Static Files Not Loading
 
-The application initially failed to apply CSS styling despite correct linking in the template. This was due to Django not recognising the static files directory.
+CSS styling was not being applied due to Django not correctly recognising the static files configuration.
 
-**To resolve this:**
+This was resolved by loading the static template tag, correcting static file paths, and defining `STATICFILES_DIRS` in `settings.py`.
 
-- `{% load static %}` was added to the base template
-- Static file paths were corrected using `{% static 'css/style.css' %}`
-- The `STATICFILES_DIRS` setting was added in `settings.py` to define the static file location
-
-This ensured that static assets were correctly loaded and applied during development.
+This ensured static assets were correctly served during development.
 
 ---
 
 ### File Structure Organisation
 
-An early issue involved incorrectly placing static files within the templates directory. This prevented Django from properly distinguishing between templates and static assets.
+Static files were initially placed within the templates directory, causing Django to misinterpret file types and fail to load assets correctly.
 
-**To resolve this:**
-
-- Static files were moved into a dedicated `static/` directory
-- Templates were kept strictly within `templates/` directories
-- A clear separation between HTML structure and CSS styling was established
+This was resolved by separating static files into a dedicated `static/` directory and keeping templates within `templates/`.
 
 This improved maintainability and aligned the project with Django best practices.
 
@@ -543,254 +526,121 @@ This improved maintainability and aligned the project with Django best practices
 
 ### URL Routing Configuration
 
-Initially, the homepage failed to render due to missing URL configuration between the project and the application.
+The homepage initially failed to render due to missing URL configuration between the project and app-level routing.
 
-**To resolve this:**
+This was resolved by defining routes in the app’s `urls.py` and including them in the main `config/urls.py` using `include()`.
 
-- A `urls.py` file was created within the `planner` app
-- The home view was mapped using `path('', views.home, name='home')`
-- The app URLs were included in the main `config/urls.py` file using `include()`
-
-This enabled correct routing and navigation within the application.
+This enabled correct page rendering and navigation across the application.
 
 ---
 
 ### Template Rendering Output Issues
 
-At one stage, the application displayed a blank page despite no visible errors. This was due to the absence of a `{% block content %}` placeholder in the base template.
+The application displayed a blank page due to a missing `{% block content %}` placeholder in the base template.
 
-**To resolve this:**
-
-- A `{% block content %}` section was added to `base.html`
-- This allowed child templates to correctly inject content into the layout
+This was resolved by adding the block to `base.html`, allowing child templates to correctly render content.
 
 This reinforced understanding of Django’s template inheritance system.
 
 ---
 
-### Key Learning Outcomes
-
-Through resolving these issues, several important development concepts were reinforced:
-
-- The importance of correct file structure in Django projects
-- How Django locates and renders templates and static files
-- The role of `settings.py` in configuring application behaviour
-- The relationship between views, templates, and URL routing
-- Debugging techniques using error messages and browser developer tools
-
-These challenges strengthened understanding of Django’s architecture and contributed to the development of a more robust and maintainable application.
-
----
-
 ### Data Not Displaying in Templates
 
-During development, an issue occurred where database records (e.g. assignments) were not appearing in the frontend templates, despite being present in the Django admin panel.
+Database records were not appearing in templates despite being present in the admin panel, due to inconsistencies between views, context data, and template variable names.
 
-This was caused by inconsistencies between views, templates, and URL routing.
+This was resolved by correctly retrieving querysets in views, passing them through context dictionaries, and ensuring template variables matched.
 
-**To resolve this:**
-
-- Ensured that querysets were correctly retrieved in views using `.objects.all()`
-- Passed data to templates using context dictionaries (e.g. `{"assignments": assignments}`)
-- Verified that template variable names matched those passed from the view
-- Checked URL routing to ensure the correct views were being rendered
-- Used debug techniques such as displaying object counts in templates
-
-This improved understanding of how Django connects the database, views, and templates.
+This improved understanding of how Django connects models, views, and templates.
 
 ---
 
 ### Missing Form Import in View
 
-During development of the driver creation feature, a `NameError` occurred because `DriverForm` had not been imported into `views.py`.
+A `NameError` occurred when creating a driver due to `DriverForm` not being imported into `views.py`.
 
-**To resolve this:**
+This was resolved by importing the form from `forms.py`, allowing the view to process form submissions correctly.
 
-- The form was defined in `forms.py` using a Django `ModelForm`
-- The missing import statement `from .forms import DriverForm` was added to `views.py`
-
-This reinforced the importance of correctly connecting Django forms, views, and templates when building CRUD functionality.
+This reinforced the importance of properly linking forms, views, and templates in Django.
 
 ---
 
 ### Missing Redirect Import in View
 
-During testing of the driver creation feature, a `NameError` occurred because `redirect` had not been imported into `views.py`.
+A `NameError` occurred during form submission because `redirect` had not been imported into `views.py`.
 
-**To resolve this:**
+This was resolved by importing `redirect` from `django.shortcuts`, allowing successful form submissions to redirect correctly.
 
-- The import statement was updated from `from django.shortcuts import render`  
-  to `from django.shortcuts import render, redirect`
-
-This ensured that successful form submissions could redirect users back to the relevant list page after saving data.
+This reinforced the importance of including all required imports when handling view logic.
 
 ---
 
 ### Form Handling and View Integration Issues
 
-During implementation of frontend forms, errors occurred when submitting data due to missing imports and incomplete view configuration.
+Errors occurred during form submission due to missing imports and incorrect handling of request methods in views.
 
-Issues included:
+This was resolved by importing the required ModelForms, adding `redirect`, and ensuring correct handling of `GET` and `POST` requests.
 
-- `ModelForm` classes not being imported into `views.py`
-- Missing `redirect` import when handling successful form submissions
-- Incorrect handling of POST requests
-
-**To resolve this:**
-
-- Imported forms using `from .forms import DriverForm, RouteForm, AvailabilityForm, AssignmentForm`
-- Updated Django shortcuts import to include `redirect`
-- Ensured correct conditional handling of request methods (`GET` vs `POST`)
-
-This reinforced understanding of how Django processes form submissions and connects forms, views, and templates.
+This improved understanding of how Django processes form submissions and connects forms, views, and templates.
 
 ---
 
 ### Edit View Errors and Debugging
 
-While building the driver edit (update) functionality, I ran into a couple of issues related to URL parameters and missing imports.
+Errors occurred when implementing the edit functionality due to mismatched URL parameters and missing imports.
 
-#### Issues encountered
+This was caused by inconsistency between the parameter name passed in the URL and the view function, as well as a missing `get_object_or_404` import.
 
-- A `TypeError` occurred:  
-  `edit_driver() got an unexpected keyword argument 'driver_id'`
+The issue was resolved by aligning parameter names between `urls.py` and `views.py`, and importing the required function.
 
-This happened because the URL was passing `driver_id`, but the view function was expecting a different parameter name.
-
-- I also forgot to import `get_object_or_404` in `views.py`, which caused another error when trying to retrieve the driver.
-
-#### How I fixed it
-
-- Updated the view function to match the URL parameter:
-
-```python
-def edit_driver(request, driver_id):
-```
-
-- Made sure the parameter name matched exactly between `urls.py` and `views.py`
-- Added the missing import:
-
-```python
-from django.shortcuts import get_object_or_404
-```
-
-#### Edit View Outcome
-
-- The edit page now loads correctly and allows existing drivers to be updated
-- Improved my understanding of how Django passes URL parameters into views
-- Reinforced the importance of consistent naming and remembering required imports
+This ensured the edit view loaded correctly and reinforced the importance of consistent naming and correct imports in Django.
 
 ---
 
 ### Availability Delete URL Error
 
-During implementation of delete functionality for availability records, a `NoReverseMatch` error occurred:
+A `NoReverseMatch` error occurred when implementing delete functionality due to a mismatch between the URL name in `urls.py` and the template reference.
 
-`Reverse for 'delete_availability' not found`
+This was resolved by ensuring consistent naming between URL patterns and template tags.
 
-This was caused by a mismatch between the URL name defined in `urls.py` and the name referenced in the template.
-
-**To resolve this:**
-
-- Ensured the URL pattern included:
-
-```python
-name="delete_availability"
-```
-
-- Verified that the template used the exact same name:
-
-```django
-{% url 'delete_availability' availability.id %}
-```
-
-- Confirmed all files were saved and the development server was reloaded
-
-This reinforced the importance of consistent naming between Django views, URLs, and templates.
+This reinforced the importance of alignment between Django views, URLs, and templates.
 
 ---
 
 ### Incorrect Messages Import
 
-While implementing user feedback messages, an `ImportError` occurred when attempting to run the server:
+An `ImportError` occurred when implementing feedback messages due to importing `messages` from the wrong module.
 
-`ImportError: cannot import name 'messages' from 'django.shortcuts'`
+This was resolved by importing `messages` from `django.contrib` instead of `django.shortcuts`.
 
-This was caused by incorrectly importing `messages` from `django.shortcuts` instead of the correct Django module.
-
-**To resolve this:**
-
-- Updated the import statements in `views.py`:
-
-```python
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-```
-
-- Restarted the development server to apply changes
-
-#### Messages Import Outcome
-
-- Success messages were displayed correctly after create, update, and delete actions
-- Improved understanding of Django module structure and correct import usage
+This ensured feedback messages displayed correctly and reinforced understanding of Django’s module structure.
 
 ---
 
-## Additional Deployment Challenges
-
 ### Deployment Issue: Missing `dj_database_url`
 
-While preparing the application for deployment, the local server failed to run after `dj_database_url` was imported into `settings.py`.
+The application failed to run locally after importing `dj_database_url` in `settings.py` before the package had been installed.
 
-The error occurred because the package had been referenced before it had been installed into the virtual environment.
+This was resolved by installing the dependency and updating `requirements.txt`.
 
-**To resolve this:**
-
-```bash
-pip install dj-database-url
-```
-
-- Regenerated `requirements.txt`
-- Retested the application locally before redeploying
-
-This reinforced the importance of keeping installed dependencies aligned with imports used in the project settings.
+This reinforced the importance of keeping project dependencies aligned with imported modules.
 
 ---
 
 ### Deployment Issue: Virtual Environment Included in Repository
 
-When pushing the project to Heroku, the build was rejected because the local `.venv` directory had been committed to the Git repository.
+The Heroku build failed because the local `.venv` directory had been committed to the repository.
 
-Heroku does not allow local virtual environments to be deployed because they are machine-specific.
+This was resolved by removing the directory from version control and adding it to `.gitignore`.
 
-**To resolve this:**
-
-```bash
-git rm --cached -r .venv
-```
-
-- Added `.venv/` to `.gitignore`
-- Recommitted the changes and pushed again
-
-This reinforced the importance of excluding local environment files from deployment.
+This reinforced the importance of excluding machine-specific files from deployment.
 
 ---
 
 ### Deployment Issue: Static Files Configuration Error
 
-During deployment, Heroku failed while running `collectstatic`.
+The deployment failed during `collectstatic` due to incomplete static files configuration in `settings.py`.
 
-This was caused by incomplete static files configuration in `settings.py`, particularly the missing `STATIC_ROOT` setting required for production.
-
-**To resolve this:**
-
-```python
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-```
-
-- Retested static file handling before redeploying
+This was resolved by correctly defining `STATIC_ROOT` alongside existing static settings.
 
 This improved understanding of the differences between local and production static file handling.
 
@@ -798,62 +648,31 @@ This improved understanding of the differences between local and production stat
 
 ### Deployment Issue: Gunicorn Not Installed
 
-After deployment, the application crashed because Heroku could not find the Gunicorn web server.
+The application crashed after deployment because the Gunicorn web server was not installed.
 
-**To resolve this:**
+This was resolved by installing Gunicorn and updating `requirements.txt`.
 
-```bash
-pip install gunicorn
-```
-
-- Updated `requirements.txt`
-- Redeployed the application
+This ensured the application could run correctly on Heroku.
 
 ---
 
 ### Deployment Issue: Missing WhiteNoise Dependency
 
-After adding `WhiteNoiseMiddleware`, the application crashed with a `ModuleNotFoundError`.
+The application crashed after adding `WhiteNoiseMiddleware` due to the `whitenoise` package not being installed.
 
-**To resolve this:**
+This was resolved by installing the dependency and updating `requirements.txt`.
 
-```bash
-pip install whitenoise
-```
-
-- Updated `requirements.txt`
-- Redeployed the application
+This ensured static files could be served correctly in production.
 
 ---
 
 ### Deployment Issue: Application Crash After Successful Build
 
-At one stage, the project deployed successfully but still showed a Heroku error page.
+The application deployed successfully but still displayed a Heroku error page due to runtime issues.
 
-This required checking logs:
+This was resolved by checking logs, identifying missing dependencies, and redeploying until the application ran correctly.
 
-```bash
-heroku logs --tail
-```
-
-**To resolve this:**
-
-- Identified runtime errors from logs
-- Installed missing dependencies
-- Redeployed until successful
-
-This demonstrated the importance of distinguishing between build success and runtime success.
-
----
-
-## Deployment Insight
-
-The production deployment process required additional configuration beyond local development, including:
-
-- Environment variables
-- Static file handling
-- Dependency management
-- Heroku-specific deployment setup
+This highlighted the importance of distinguishing between build success and runtime success.
 
 ### JavaScript Message Dismissal Issue
 
