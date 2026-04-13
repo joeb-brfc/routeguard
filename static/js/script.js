@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const messages = document.querySelectorAll('.message-list');
+document.addEventListener('DOMContentLoaded', function () {
+    const messages = document.querySelector('.message-list');
 
     if (messages) {
         setTimeout(() => {

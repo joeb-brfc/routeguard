@@ -82,6 +82,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Deployment Issue: Missing WhiteNoise Dependency](#deployment-issue-missing-whitenoise-dependency)
     - [Deployment Issue: Application Crash After Successful Build](#deployment-issue-application-crash-after-successful-build)
   - [Deployment Insight](#deployment-insight)
+    - [JavaScript Message Dismissal Issue](#javascript-message-dismissal-issue)
   - [Conclusion](#conclusion)
 
 ## Live Application
@@ -853,6 +854,12 @@ The production deployment process required additional configuration beyond local
 - Static file handling
 - Dependency management
 - Heroku-specific deployment setup
+
+### JavaScript Message Dismissal Issue
+
+An issue occurred where feedback messages did not disappear as expected. This was caused by using `querySelectorAll()` instead of `querySelector()`, which returned a NodeList rather than a single element.
+
+After correcting the selector, the message dismissal worked as intended, improving frontend interactivity and user experience.
 
 ## Conclusion
 
