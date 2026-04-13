@@ -14,7 +14,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [User Stories](#user-stories)
     - [Core User Stories](#core-user-stories)
     - [Availability \& Validation](#availability--validation)
-    - [Feedback \& Risk](#feedback--risk)
+    - [Feedback](#feedback)
   - [Data Model](#data-model)
     - [Driver](#driver)
     - [Route](#route)
@@ -55,7 +55,6 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [Deployment](#deployment)
     - [Deployment Steps](#deployment-steps)
       - [Environment Variables](#environment-variables)
-      - [Notes](#notes)
   - [Credits](#credits)
   - [Challenges Faced \& Solutions](#challenges-faced--solutions)
     - [Template Structure and Inheritance Issues](#template-structure-and-inheritance-issues)
@@ -141,7 +140,6 @@ The application is designed with simplicity and clarity in mind:
 - Forms are used for creating and updating records
 - Immediate feedback is provided after actions (e.g. success messages, validation errors)
 - The layout is responsive and accessible across different screen sizes
-- Colour indicators (green, amber, red) provide intuitive feedback on assignment risk
 - Data is displayed in structured tables to improve clarity and usability
 - Users can create new records directly from the interface without using the admin panel
 - Users receive immediate visual feedback through updated tables after submitting data
@@ -169,10 +167,9 @@ The goal is to ensure that users can perform tasks quickly without confusion.
 - As a user, I want to prevent assigning a driver to overlapping routes so that double-booking does not occur
 - As a user, I want to prevent drivers being assigned more than once on the same day so that duplicate daily bookings do not occur
 
-### Feedback & Risk
+### Feedback
 
 - As a user, I want to receive feedback when creating assignments so that I understand whether the action was successful
-- As a user, I want to see a simple risk indicator (green, amber, red) so that I can identify potential scheduling issues
 
 ---
 
@@ -209,23 +206,18 @@ The application is built using a relational database with the following core mod
 ## Features
 
 - Full CRUD functionality for Drivers, Routes, Availability, and Assignments
-- Frontend forms built using Django ModelForms to allow users to create records without using the admin panel
+- Frontend forms built using Django ModelForms to allow users to create and update records without using the admin panel
 - Dynamic data rendering from the database using Django views and templates
 - Navigation links between all key data pages (Drivers, Routes, Assignments, Availabilities)
 - Data displayed in structured table layouts for improved readability and usability
 - Automatic redirection after successful form submission to improve user workflow
-- Validation to support data integrity, including prevention of duplicate driver records and scheduling conflicts
-- Responsive layout using HTML and CSS
-- Admin panel for backend data management
-- Assignment validation to prevent duplicate same-day driver bookings
-- Frontend edit functionality for updating existing records
-- Frontend delete functionality with confirmation pages to reduce accidental data removal
-- Frontend edit and delete functionality for availability records with confirmation pages
-- User feedback messages displayed after create, update, and delete actions to improve user experience
-- Consistent styling applied across CRUD pages for improved readability and usability
-- Success messages displayed clearly after create, update, and delete actions
+- Validation to support data integrity, including prevention of duplicate driver records, unavailable driver assignments, invalid time ranges, and duplicate same-day bookings
+- Delete confirmation pages to reduce accidental data removal
+- User feedback messages displayed after create, update, and delete actions
 - User authentication with signup, login, and logout functionality
 - Protected create, update, and delete views so only authenticated users can modify data
+- Admin panel for backend data management
+- Responsive layout using HTML and CSS
 
 ---
 
@@ -315,6 +307,7 @@ This structure ensures clear separation of concerns and maintainable code.
 - Integration with external logistics systems
 - Exporting reports
 - More advanced time-based validation, including rest-gap checks and cumulative driver-hours rules
+- Colour indicators (green, amber, red) provide intuitive feedback on assignment risk
 
 ---
 
@@ -324,10 +317,12 @@ This structure ensures clear separation of concerns and maintainable code.
 - Django
 - HTML
 - CSS
-- SQLite (development database)
+- SQLite (used as the development database)
+- Gunicorn (used as the production web server)
+- WhiteNoise (used to serve static files in production)
 - Git & GitHub (version control)
-- Heroku (deployment)
-- Django Forms (ModelForms for data input and validation)
+- Heroku (deployment platform)
+- Django ModelForms (for form handling and validation)
 
 ---
 
@@ -463,23 +458,23 @@ The application was deployed to Heroku using Git and the Heroku CLI.
 web: gunicorn config.wsgi
 ```
 
-1. Updated `settings.py` for deployment by:
+5. Updated `settings.py` for deployment by:
    - moving `SECRET_KEY` to an environment variable
    - controlling `DEBUG` with an environment variable
    - adding Heroku-compatible `ALLOWED_HOSTS`
    - configuring static files using `STATIC_ROOT`
-2. Added Heroku config vars for:
+6. Added Heroku config vars for:
    - `SECRET_KEY`
    - `DEBUG`
-3. Removed the local virtual environment folder from version control and added `.venv/` to `.gitignore`
-4. Pushed the project to Heroku using:
+7. Removed the local virtual environment folder from version control and added `.venv/` to `.gitignore`
+8. Pushed the project to Heroku using:
 
 ```bash
 git push heroku main
 ```
 
-1. Ran migrations on the deployed application
-2. Tested the live application to ensure that pages, authentication, CRUD features, validation, and styling all worked as expected
+9. Ran migrations on the deployed application
+10. Tested the live application to ensure that pages, authentication, CRUD features, validation, and styling all worked as expected
 
 #### Environment Variables
 
@@ -488,28 +483,16 @@ The following environment variables were used in deployment:
 - `SECRET_KEY`
 - `DEBUG`
 
-#### Notes
-
-The production version uses a different environment from local development, so several deployment-specific issues had to be resolved before the application ran correctly on Heroku.
-
 ---
 
 ## Credits
 
-- Django documentation
+- Django documentation, particularly for ModelForms, form validation, authentication, template logic, production settings, and static files
 - Code Institute learning materials
-- Online resources and tutorials used for guidance
-- Visual Studio Code was used as the primary development environment, including features such as IntelliSense and auto-completion to support efficient coding
-- Django documentation, particularly guidance on ModelForms, form validation, and querying related models
-- Django Authentication System (`django.contrib.auth`) used for login, logout, and user management  
-- Django `@login_required` decorator used to protect restricted views  
 - Heroku documentation and deployment guidance
-- Django documentation, particularly guidance on production settings and static files
-- Django documentation was used for guidance on template logic, including conditional rendering and use of `request.path` within templates
-- CSS styling guidance for table row striping using the `:nth-child` pseudo-class was referenced from GeeksforGeeks
-- VS Code Markdown Preview tools were used to review README formatting and structure
-- markdownlint was used to help improve README structure and formatting consistency
-- Markdown Preview Mermaid Support was used to assist with previewing and checking markdown formatting during README development
+- GeeksforGeeks for guidance on CSS `:nth-child` pseudo-class usage for alternating table row styling
+- Visual Studio Code was used as the primary development environment, including IntelliSense and auto-completion features
+- VS Code Markdown Preview tools, Markdown Preview Mermaid Support, and markdownlint were used to help structure and format the README
 
 ---
 
