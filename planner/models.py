@@ -1,5 +1,7 @@
 from django.db import models
 
+# Model structure inspired by Django documentation:
+# https://docs.djangoproject.com/en/6.0/topics/db/models/
 
 class Driver(models.Model):
     name = models.CharField(max_length=100)

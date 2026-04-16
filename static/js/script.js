@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const messages = document.querySelector('.message-list');
+    /*https://stackoverflow.com/questions/3331353/transitions-on-the-css-display-property*/
 
     if (messages) {
         setTimeout(() => {

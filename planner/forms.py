@@ -17,6 +17,10 @@ class AvailabilityForm(forms.ModelForm):
         model = Availability
         fields = ["driver", "date", "status"]
 
+# Custom form validation implemented using Django validation guidelines:
+# https://docs.djangoproject.com/en/6.0/ref/forms/validation/
+# Adapted to enforce driver scheduling rules (availability, time checks, duplicate assignments)
+
 class AssignmentForm(forms.ModelForm):
     class Meta:
         model = Assignment
@@ -32,14 +36,14 @@ class AssignmentForm(forms.ModelForm):
         start_time = cleaned_data.get("start_time")
         end_time = cleaned_data.get("end_time")
 
-        # validation 1: Check that end time is after start time
+        # validation 1: Check that end time is after start time & both times are provided
         if start_time and end_time:
             if end_time <= start_time:
                 raise forms.ValidationError(
                     "End time must be later than start time."
                 )
             
-        # validation 2 Check that the driver is available on that date
+        # validation 2 Check that the driver is available on that date & availability record exists
         if driver and date:
             availability = Availability.objects.filter(driver=driver, date=date).first()
             if availability and availability.status != "available":

@@ -2,10 +2,10 @@
 
 A Django-based logistics planning application for managing drivers, routes, and scheduling.
 
-## Table of Contents (TOC)
+## Table of Contents
 
 - [RouteGuard](#routeguard)
-  - [Table of Contents (TOC)](#table-of-contents-toc)
+  - [Table of Contents](#table-of-contents)
   - [Live Application](#live-application)
   - [Overview](#overview)
   - [Project Purpose](#project-purpose)
@@ -39,7 +39,6 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Functional Testing](#functional-testing)
     - [Data Rendering Testing](#data-rendering-testing)
     - [UI Testing](#ui-testing)
-    - [Error Handling](#error-handling)
     - [Form Submission Testing](#form-submission-testing)
     - [Assignment Validation Testing](#assignment-validation-testing)
     - [Update Functionality Testing](#update-functionality-testing)
@@ -340,13 +339,6 @@ Manual testing was carried out throughout development to ensure functionality, u
 - Confirmed that table layouts render correctly across all list pages
 - Verified consistent styling across pages using shared CSS
 - Checked responsiveness of layout on different screen sizes
-
-### Error Handling
-
-- Identified and resolved issues where data was not appearing due to:
-  - Incorrect variable names between views and templates
-  - Missing context being passed from views
-  - URL routing mismatches
 
 ### Form Submission Testing
 
