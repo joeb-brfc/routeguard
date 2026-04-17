@@ -42,6 +42,10 @@ def availability_list(request):
         {"availabilities": availabilities},
     )
 
+# Access control implemented using Django's login_required decorator:
+# https://docs.djangoproject.com/en/6.0/topics/auth/default/#the-login-required-decorator
+# Used to restrict create, edit, and delete views to authenticated users
+
 @login_required
 def create_driver(request):
     if request.method == "POST":
