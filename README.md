@@ -11,6 +11,14 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [Project Purpose](#project-purpose)
   - [Target Users](#target-users)
   - [User Experience](#user-experience)
+  - [Wireframes](#wireframes)
+    - [Assignments Page](#assignments-page)
+    - [Drivers Page](#drivers-page)
+    - [Routes Page](#routes-page)
+    - [Availabilities Page](#availabilities-page)
+    - [Create Form](#create-form)
+    - [Edit Form](#edit-form)
+    - [Delete Confirmation](#delete-confirmation)
   - [User Stories](#user-stories)
     - [Core User Stories](#core-user-stories)
     - [Availability \& Validation](#availability--validation)
@@ -30,7 +38,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Assignment Management](#assignment-management)
     - [Record Creation Form](#record-creation-form)
     - [Edit Functionality](#edit-functionality)
-    - [Delete Confirmation](#delete-confirmation)
+    - [Delete Confirmation](#delete-confirmation-1)
     - [Authentication](#authentication)
   - [Data Flow and Application Logic](#data-flow-and-application-logic)
   - [Future Features](#future-features)
@@ -138,6 +146,33 @@ The application is designed with simplicity and clarity in mind:
 - Brief descriptive text was added to key pages to help users understand the purpose of each section
 
 The goal is to ensure that users can complete common planning tasks quickly and clearly.
+
+---
+
+## Wireframes
+
+Initial wireframes were created during the planning phase to define layout, navigation, and user interactions before development began.
+
+### Assignments Page
+![Assignments Wireframe](docs/wireframes/assignments-wireframe.png)
+
+### Drivers Page
+![Drivers Wireframe](docs/wireframes/drivers-wireframe.png)
+
+### Routes Page
+![Routes Wireframe](docs/wireframes/routes-wireframe.png)
+
+### Availabilities Page
+![Availabilities Wireframe](docs/wireframes/availabilities-wireframe.png)
+
+### Create Form
+![Create Wireframe](docs/wireframes/add-wireframe.png)
+
+### Edit Form
+![Edit Wireframe](docs/wireframes/edit-wireframe.png)
+
+### Delete Confirmation
+![Delete Wireframe](docs/wireframes/delete-wireframe.png)
 
 ---
 
