@@ -44,6 +44,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
   - [Data Flow and Application Logic](#data-flow-and-application-logic)
   - [Future Features](#future-features)
   - [Technologies Used](#technologies-used)
+    - [Code Standards](#code-standards)
   - [Testing](#testing)
     - [Functional Testing](#functional-testing)
     - [Data Rendering Testing](#data-rendering-testing)
@@ -358,6 +359,16 @@ This structure ensures clear separation of concerns and maintainable code.
 - Git & GitHub (version control)
 - Heroku (deployment platform)
 - Django ModelForms (for form handling and validation)
+
+### Code Standards
+
+Python code was written in accordance with the PEP8 style guide.
+
+- Code was formatted with consistent indentation and spacing
+- Meaningful variable and function names were used
+
+Reference:
+https://peps.python.org/pep-0008/
 
 ---
 
