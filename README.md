@@ -29,6 +29,7 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Availability](#availability)
     - [Assignment](#assignment)
     - [Relationships](#relationships)
+    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
   - [Features](#features)
   - [Screenshots](#screenshots)
     - [Homepage](#homepage)
@@ -227,6 +228,12 @@ The application is built using a relational database with the following core mod
 - A driver can have many assignments
 - A route can be assigned multiple times
 - Each assignment links one driver to one route
+
+### Entity Relationship Diagram (ERD)
+
+An Entity Relationship Diagram was added to visually support the data model and show how the core models relate to each other.
+
+![ERD](docs/erd.png)
 
 ---
 
