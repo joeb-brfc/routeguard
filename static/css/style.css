@@ -104,3 +104,39 @@ nav a.active {
 .logout-form button:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    nav a.active {
+        border-bottom: 1px solid #ccc;
+        width: auto;
+        display: inline-block;
+    }
+
+    nav a,
+    .logout-form button {
+        display: block;
+        width: 100%;
+        padding: 6px 0;
+    }
+
+    
+}

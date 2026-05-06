@@ -560,6 +560,7 @@ The following environment variables were used in deployment:
 - Visual Studio Code was used as the primary development environment, including IntelliSense and auto-completion features
 - VS Code Markdown Preview tools, Markdown Preview Mermaid Support, and markdownlint were used to help structure and format the README
 - JavaScript `setTimeout` functionality was implemented to enhance user experience, inspired by general JavaScript learning resources such as Mimo (https://mimo.org/glossary/javascript/settimeout)
+- Wireframes were created using Google Drawings
 
 ---
 
