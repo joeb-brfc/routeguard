@@ -47,14 +47,15 @@ A Django-based logistics planning application for managing drivers, routes, and 
     - [Functional Testing](#functional-testing)
     - [Data Rendering Testing](#data-rendering-testing)
     - [UI Testing](#ui-testing)
-    - [Form Submission Testing](#form-submission-testing)
+    - [CRUD Functionality Testing](#crud-functionality-testing)
+      - [Create](#create)
+      - [Read](#read)
+      - [Update](#update)
+      - [Delete](#delete)
     - [Assignment Validation Testing](#assignment-validation-testing)
-    - [Update Functionality Testing](#update-functionality-testing)
-    - [Delete Functionality Testing](#delete-functionality-testing)
-    - [Availability CRUD Testing](#availability-crud-testing)
     - [User Feedback Testing](#user-feedback-testing)
-    - [UI Polish Testing](#ui-polish-testing)
     - [Authentication Testing](#authentication-testing)
+    - [UI Polish Testing](#ui-polish-testing)
     - [Live Deployment Testing](#live-deployment-testing)
     - [HTML Validation](#html-validation)
     - [CSS Validation](#css-validation)
@@ -355,90 +356,127 @@ This structure ensures clear separation of concerns and maintainable code.
 
 ## Testing
 
-Manual testing was carried out throughout development to ensure functionality, usability, and data handling across the application.
+Manual testing was carried out throughout development to ensure functionality, usability, and data handling across the application. 
+
+Testing included both functional verification and visual confirmation through screenshots to demonstrate correct behaviour across key user interactions.
+
+---
 
 ### Functional Testing
 
-- Verified that all models (Driver, Route, Availability, Assignment) could be created and viewed via the Django admin panel
-- Confirmed that data stored in the database is correctly retrieved and displayed in templates
-- Tested navigation links between pages to ensure correct routing
+- Verified that all models (Driver, Route, Availability, Assignment) can be created and viewed via the Django admin panel  
+- Confirmed that data stored in the database is correctly retrieved and displayed in templates  
+- Tested navigation links between all pages to ensure correct routing  
+
+---
 
 ### Data Rendering Testing
 
-- Ensured that data passed from views is correctly rendered in templates
-- Tested scenarios where no data exists to confirm fallback messages (e.g. "No assignments have been added yet") display correctly
-- Used temporary debug outputs (e.g. `{{ assignments|length }}`) to confirm data was being passed correctly
+- Ensured that data passed from views is correctly rendered in templates  
+- Tested scenarios where no data exists to confirm fallback messages (e.g. *"No assignments have been added yet"*) display correctly  
+- Used temporary debug outputs (e.g. `{{ assignments|length }}`) to confirm data was being passed correctly  
+
+---
 
 ### UI Testing
 
-- Confirmed that table layouts render correctly across all list pages
-- Verified consistent styling across pages using shared CSS
-- Checked responsiveness of layout on different screen sizes
+- Confirmed that table layouts render correctly across all list pages  
+- Verified consistent styling across navigation, tables, forms, and messages  
+- Checked responsiveness across different screen sizes  
 
-### Form Submission Testing
+---
 
-- Verified that Driver and Route forms render correctly on the frontend
-- Confirmed that valid form submissions create new database records
-- Ensured users are redirected to the appropriate list page after submission
-- Tested invalid inputs to confirm validation errors are displayed
+### CRUD Functionality Testing
+
+Full CRUD (Create, Read, Update, Delete) functionality was tested across all core models:
+
+- Drivers  
+- Routes  
+- Availability  
+- Assignments  
+
+#### Create
+
+- Verified that new records can be created using frontend forms for all models  
+- Confirmed that valid submissions are saved to the database  
+- Ensured users are redirected to the appropriate list page after submission  
+
+![Create Form](docs/screenshots/create-form-test.png)  
+![Create Result](docs/screenshots/create-form-test-result.png)
+
+#### Read
+
+- Confirmed that all records are retrieved from the database and displayed correctly in templates  
+- Verified correct table rendering across all list pages  
+
+#### Update
+
+- Verified that existing records can be edited using pre-populated forms across all models  
+- Confirmed that updated data is saved correctly and reflected immediately in the UI  
+
+![Edit Form](docs/screenshots/edit-form-test.png)  
+![Edit Result](docs/screenshots/edit-form-test-result.png)
+
+#### Delete
+
+- Verified that records can be deleted via confirmation pages for all models  
+- Confirmed that deleted records are removed from the database and no longer appear in list views  
+
+![Delete Confirmation](docs/screenshots/delete-form-test.png)  
+![Delete Result](docs/screenshots/delete-form-test-result.png)
+
+These tests confirm that all CRUD actions are immediately reflected in the user interface.
+
+---
 
 ### Assignment Validation Testing
 
-- Verified that assignments cannot be created if the end time is earlier than the start time
-- Confirmed that drivers marked as unavailable cannot be assigned on that date
-- Tested that drivers cannot be assigned more than once on the same date
-- Confirmed that validation errors are displayed clearly to the user on the form
-- Confirmed that assignment validation also applies during record updates, preventing a driver from being edited onto an unavailable date
+- Verified that assignments cannot be created if the end time is earlier than the start time  
+- Confirmed that unavailable drivers cannot be assigned on specific dates  
+- Tested that drivers cannot be assigned more than once on the same date  
+- Confirmed validation applies to both create and update actions  
+- Verified that clear error messages are displayed to users when validation fails  
 
-### Update Functionality Testing
-
-- Verified that existing driver records can be edited through the frontend
-- Confirmed that forms load with existing values pre-filled
-- Ensured updated data is saved and displayed immediately in the relevant table
-
-### Delete Functionality Testing
-
-- Verified that driver records can be deleted through the frontend
-- Confirmed that delete confirmation pages display the correct record details
-- Ensured records are removed from the database and no longer appear in the list view
-
-### Availability CRUD Testing
-
-- Verified that availability records can be created, viewed, updated, and deleted through the frontend
-- Confirmed that edit forms pre-populate with existing data and save changes correctly
-- Tested delete confirmation flow to ensure records are only removed after user confirmation
-- Ensured deleted records no longer appear in the availability list
-- Confirmed validation rules continue to apply during updates
+---
 
 ### User Feedback Testing
 
-- Verified that success messages are displayed after creating, updating, and deleting records
-- Confirmed messages appear consistently across all models (Drivers, Routes, Assignments, Availabilities)
-- Ensured messages improve user feedback and confirm successful actions
+- Verified that success messages are displayed after creating, updating, and deleting records  
+- Confirmed messages appear consistently across all models  
+- Ensured feedback improves user clarity and confirms successful actions  
 
-### UI Polish Testing
-
-- Verified that shared styling was applied consistently across all main pages
-- Confirmed that tables, navigation, and success messages display clearly
-- Checked that descriptive page text improves clarity without affecting functionality
+---
 
 ### Authentication Testing
 
-- Verified that new users can register using the signup form
-- Confirmed that existing users can log in and log out successfully
-- Tested protected create, update, and delete pages to ensure unauthenticated users are redirected to the login page
-- Confirmed authenticated users can access protected functionality normally
+- Verified that new users can register using the signup form  
+- Confirmed that successful registration redirects users to the login page  
+- Verified login and logout functionality works correctly  
+- Confirmed protected pages require authentication and redirect unauthenticated users  
+- Identified and resolved a logout issue by implementing a POST request with CSRF protection  
+
+![Sign Up Form](docs/screenshots/sign-up-form-test.png)  
+![Sign Up Result](docs/screenshots/sign-up-form-test-result.png)
+
+---
+
+### UI Polish Testing
+
+- Verified consistent styling across all main pages  
+- Confirmed navigation, tables, and messages display clearly  
+- Ensured descriptive page text improves usability without affecting functionality  
+
+---
 
 ### Live Deployment Testing
 
-- Verified that the deployed Heroku application loads successfully
-- Confirmed that static files such as CSS are served correctly in production
-- Tested login, logout, and signup functionality on the live site
-- Confirmed that CRUD functionality works as expected on the deployed version
-- Verified that validation rules continue to work in production
-- Confirmed that protected pages redirect unauthenticated users to the login page
+- Verified that the deployed Heroku application loads successfully  
+- Confirmed static files (CSS, JavaScript) are served correctly in production  
+- Tested authentication and CRUD functionality on the live site  
+- Verified validation rules behave consistently in production  
+- Confirmed protected pages redirect unauthenticated users correctly  
 
-All identified issues were resolved and documented in the Challenges section.
+---
 
 ### HTML Validation
 
@@ -446,17 +484,25 @@ All identified issues were resolved and documented in the Challenges section.
 
 HTML templates were tested using the W3C Markup Validation Service. Minor issues were identified and corrected during development.
 
+---
+
 ### CSS Validation
 
 ![CSS](docs/screenshots/css-validator.png)
 
-The stylesheet was tested using the W3C CSS Validation Service to confirm valid CSS syntax.
+The stylesheet was tested using the W3C CSS Validation Service to confirm valid syntax.
+
+---
 
 ### Lighthouse Testing
 
 ![Lighthouse](docs/screenshots/lighthouse.png)
 
-Lighthouse testing was carried out in Chrome Developer Tools to review performance, accessibility, best practices, and SEO. The results helped identify frontend improvements and confirm that the site follows good usability standards.
+Lighthouse testing was conducted using Chrome Developer Tools to review performance, accessibility, best practices, and SEO. Results confirmed that the application meets good usability standards.
+
+---
+
+All identified issues were resolved and are documented in the **Challenges Faced & Solutions** section.
 
 ---
 
